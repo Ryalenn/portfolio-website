@@ -1,0 +1,72 @@
+{
+  "site.title": "Théophile B.",
+  "site.subtitle": "Projects around Python, AI, audio and data.",
+
+  "card.github": "View on GitHub",
+  "card.article": "Read the article",
+
+  "card.audio.title": "Music Instrument Classification",
+  "card.audio.meta": "Deep learning · Audio",
+  "card.audio.desc": "Neural network trained on spectrograms to recognize different instruments from short audio recordings.",
+  "card.audio.tag.python": "Python",
+  "card.audio.tag.pytorch": "PyTorch",
+  "card.audio.tag.librosa": "Librosa",
+
+  "card.site.title": "Construction Site Data Analysis",
+  "card.site.meta": "Computer vision · Safety",
+  "card.site.desc": "Detection of risky situations on construction site images, incident aggregation, and dashboard visualization.",
+  "card.site.tag.pandas": "Pandas",
+  "card.site.tag.vision": "Vision",
+  "card.site.tag.powerbi": "Power BI",
+
+  "card.nlp.title": "Toxic Comment Classification – NLP",
+  "card.nlp.meta": "NLP · Multi-label",
+  "card.nlp.desc": "Automatic toxicity detection in online comments using spaCy embeddings and a lightweight neural network.",
+  "card.nlp.tag.python": "Python",
+  "card.nlp.tag.spacy": "spaCy",
+  "card.nlp.tag.mlp": "MLP",
+
+  "article.nlp.back": "← Back",
+
+  "article.nlp.title": "Toxic Comment Classification – Multi-label NLP Project",
+  "article.nlp.subtitle": "This project explores automatic toxicity detection in online comments using a classic NLP pipeline and a lightweight neural network, rather than modern transformers.",
+
+  "article.nlp.overview.title": "1. Project overview",
+  "article.nlp.overview.text": "Online platforms generate massive volumes of user-generated text, sometimes containing insults, threats, or hateful speech. The goal is to detect six toxicity categories (toxic, severe toxic, obscene, threat, insult, identity hate) as well as a complementary label not toxic (meaning a comment that contains none of the six other categories). The model is multi-label: a single comment can activate multiple labels at the same time.",
+
+  "article.nlp.dataset.title": "2. Dataset",
+  "article.nlp.dataset.text": "The model relies on the Toxic Comment Classification dataset (Kaggle). It contains around 159,000 comments, each annotated with six binary labels. The classes are highly imbalanced: threat, severe toxic, and identity hate are rare, while most comments are non-toxic, which makes learning and generalization on minority categories harder.",
+
+  "article.nlp.methodology.title": "3. Overall methodology",
+  "article.nlp.methodology.text": "The pipeline follows a readable structure: text preprocessing with spaCy, extraction of 300-dimensional embedding vectors, aggregation of word vectors into a sentence vector, then passing it through a multi-layer perceptron. The goal is not to achieve state-of-the-art results, but a compact, interpretable architecture that is easy to explain.",
+
+  "article.nlp.preprocessing.title": "3.1 Text preprocessing",
+  "article.nlp.preprocessing.text": "Preprocessing is done with spaCy (en_core_web_md). Steps include: tokenization, stopword removal, lemmatization, filtering non-alphabetic tokens, projecting each lemma into a 300-dimensional embedding vector, then aggregating vectors with a simple sum. This representation loses word order, but captures enough semantic signal to train a consistent model.",
+
+  "article.nlp.embeddings.title": "3.2 Feature extraction (embeddings)",
+  "article.nlp.embeddings.text": "spaCy pretrained embeddings provide a 300-dimensional vector for each known word. Semantically similar words end up in nearby regions of the vector space. A comment representation is obtained by summing the vectors of its words, which avoids training a full language model and enables very fast inference.",
+
+  "article.nlp.architecture.title": "3.3 Neural network architecture",
+  "article.nlp.architecture.text": "The classifier is a Multi-Layer Perceptron (MLP) with an input layer of size 300, three hidden layers of size 100 with tanh activations, and an output layer of size 7 (one output per label). The optimizer used is Adam with a constant learning rate. The architecture remains simple, but expressive enough to model the main patterns in the dataset.",
+
+  "article.nlp.training.title": "4. Training and evaluation",
+  "article.nlp.training.text": "The dataset is split into 80% for training and 20% for testing. Because the task is multi-label, evaluation relies on precision, recall, and F1-score, both globally and per class. The Adam optimizer automatically adapts each weight’s learning rate and provides stable convergence for this type of problem.",
+
+  "article.nlp.results.title": "5. Results",
+  "article.nlp.results.text": "The model achieves good performance on frequent classes such as toxic and insult, while rarer categories (threat, identity hate, severe toxic) remain difficult to predict reliably. Despite its simplicity, the multi-label classifier produces consistent scores on most comments, making it a good trade-off between clarity and performance.",
+
+  "article.nlp.example.title": "Prediction example",
+  "article.nlp.example.text": "For the comment “You're a disgusting idiot.”, the model typically activates the Toxic, Insult, and Obscene labels, but not Threat or Identity Hate, and does not mark Not Toxic. This kind of example illustrates the model’s ability to capture multiple facets of toxicity within a single sentence.",
+
+  "article.nlp.limitations.title": "6. Model limitations",
+  "article.nlp.limitations.text": "Several important limitations remain: summing embeddings loses word order and grammatical structure, rare classes yield low F1-scores, and the MLP cannot capture long-range dependencies or subtle contextual meaning. In addition, pretrained embeddings are not specialized for the toxicity domain and are not fine-tuned during training.",
+
+  "article.nlp.future.title": "7. Future improvements",
+  "article.nlp.future.text": "Possible improvements include: replacing summed embeddings with transformer-based models (BERT, RoBERTa), introducing attention mechanisms to better exploit context, augmenting data for rare classes, experimenting with TF-IDF + linear models, or testing optimization variants such as AdamW and learning-rate schedulers.",
+
+  "article.nlp.structure.title": "8. Repository structure",
+  "article.nlp.structure.text": ".\n├── Train_model.py\n├── Use_model.py\n├── README.md\n├── /images\n├── /graphs\n└── NLP_BEST_Model.pkl",
+
+  "article.nlp.note.title": "9. Personal note",
+  "article.nlp.note.text": "This project helped me deepen my understanding of classic NLP pipelines, pretrained embeddings, multi-label classification, and neural network optimization. It shows that a simple architecture can be surprisingly effective when paired with solid preprocessing and rigorous evaluation."
+}
