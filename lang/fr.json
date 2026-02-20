@@ -1,0 +1,108 @@
+{
+  "site.title": "Théophile B.",
+  "site.subtitle": "Projets autour de Python, IA, audio et data.",
+
+  "card.github": "Voir sur GitHub",
+  "card.article": "Lire l’article",
+
+  "card.audio.title": "Classification d'instruments de musique",
+  "card.audio.meta": "Deep learning · Audio",
+  "card.audio.desc": "CNN entraîné sur des caractéristiques MFCC pour reconnaître différents instruments à partir d’enregistrements audio courts.",
+  "card.audio.tag.python": "Python",
+  "card.audio.tag.keras": "Keras",
+  "card.audio.tag.librosa": "Librosa",
+
+  "card.site.title": "Analyse de données de chantier",
+  "card.site.meta": "Computer vision · Sécurité",
+  "card.site.desc": "Détection de situations à risque sur des images de chantier, agrégation des incidents et visualisation via tableau de bord.",
+  "card.site.tag.pandas": "Pandas",
+  "card.site.tag.vision": "Vision",
+  "card.site.tag.powerbi": "Power BI",
+
+  "card.nlp.title": "Toxic Comment Classification – NLP",
+  "card.nlp.meta": "NLP · Multi-label",
+  "card.nlp.desc": "Détection automatique de toxicité dans des commentaires en ligne à l’aide d’embeddings spaCy et d’un réseau de neurones léger.",
+  "card.nlp.tag.python": "Python",
+  "card.nlp.tag.spacy": "spaCy",
+  "card.nlp.tag.mlp": "MLP",
+
+  "article.nlp.back": "← Retour",
+
+  "article.nlp.title": "Toxic Comment Classification – Projet NLP multi-label",
+  "article.nlp.subtitle": "Ce projet explore la détection automatique de toxicité dans des commentaires en ligne en utilisant une pipeline NLP classique et un réseau de neurones léger, plutôt que des transformers modernes.",
+
+  "article.nlp.overview.title": "1. Vue d'ensemble du projet",
+  "article.nlp.overview.text": "Les plateformes en ligne génèrent d’énormes volumes de texte utilisateur, parfois porteurs d’insultes, de menaces ou de discours haineux. L’objectif est de détecter six catégories de toxicité (toxic, severe toxic, obscene, threat, insult, identity hate) ainsi qu’un label complémentaire not toxic (correspondant à un commentaire ne comportant aucune des six autres categories). Le modèle est multi-label : un même commentaire peut comporter plusieurs labels en même temps.",
+
+  "article.nlp.dataset.title": "2. Dataset",
+  "article.nlp.dataset.text": "Le modèle s’appuie sur le dataset Toxic Comment Classification (Kaggle). Il contient environ 159 000 commentaires, chacun annoté avec six labels binaires. Les classes sont fortement déséquilibrées : threat, severe toxic et identity hate sont rares alors que la plupart des commentaires sont non toxiques, ce qui complique l’apprentissage et la généralisation du modèle sur ces catégories minoritaires.",
+
+  "article.nlp.methodology.title": "3. Méthodologie générale",
+  "article.nlp.methodology.text": "La pipeline suit une structure lisible : prétraitement des textes avec spaCy, extraction de vecteurs d’embeddings de dimension 300, agrégation des mots en un vecteur de phrase, puis passage dans un perceptron multicouche. L’objectif n’est pas d’obtenir l’état de l’art, mais une architecture compacte, interprétable et facile à expliquer.",
+
+  "article.nlp.preprocessing.title": "3.1 Prétraitement du texte",
+  "article.nlp.preprocessing.text": "Le prétraitement est réalisé avec spaCy (en_core_web_md). Les étapes incluent : tokenisation, suppression des stopwords, lemmatisation, filtrage des tokens non alphabétiques, projection de chaque lemme dans un vecteur d’embedding de dimension 300, puis agrégation des vecteurs par simple somme. Cette représentation perd l’ordre des mots, mais capture suffisamment de signal sémantique pour entraîner un modèle cohérent.",
+
+  "article.nlp.embeddings.title": "3.2 Extraction de caractéristiques (embeddings)",
+  "article.nlp.embeddings.text": "Les embeddings préentraînés de spaCy fournissent un vecteur de dimension 300 pour chaque mot connu. Les mots sémantiquement proches se retrouvent dans des régions similaires de l’espace vectoriel. La représentation d’un commentaire est obtenue en sommant les vecteurs des mots qui le composent, ce qui évite d’entraîner un modèle de langage complet et permet des temps d’inférence très rapides.",
+
+  "article.nlp.architecture.title": "3.3 Architecture du réseau de neurones",
+  "article.nlp.architecture.text": "Le classifieur est un perceptron multicouche (MLP) avec une couche d’entrée de taille 300, trois couches cachées de taille 100 avec activation tanh, et une couche de sortie de taille 7 (une sortie par label). L’optimiseur utilisé est Adam avec un taux d’apprentissage constant. L’architecture reste simple, mais suffisamment expressive pour modéliser les principaux patterns du dataset.",
+
+  "article.nlp.training.title": "4. Entraînement et évaluation",
+  "article.nlp.training.text": "Le dataset est divisé en 80 % pour l’entraînement et 20 % pour le test. Étant donné la nature multi-label de la tâche, l’évaluation repose sur la précision, le recall et le F1-score, à la fois globalement et par classe. L’optimiseur Adam ajuste automatiquement le taux d’apprentissage de chaque poids et fournit une convergence stable sur ce type de problème.",
+
+  "article.nlp.results.title": "5. Résultats",
+  "article.nlp.results.text": "Le modèle obtient de bonnes performances sur les classes fréquentes comme toxic et insult, tandis que les catégories plus rares (threat, identity hate, severe toxic) restent difficiles à prédire de manière fiable. Malgré sa simplicité, le classifieur multi-label produit des scores cohérents sur la majorité des commentaires, ce qui en fait un bon compromis entre lisibilité et performance.",
+
+  "article.nlp.example.title": "Exemple de prédiction",
+  "article.nlp.example.text": "Pour le commentaire « You're a disgusting idiot. », le modèle active typiquement les labels Toxic, Insult et Obscene, mais pas Threat ni Identity Hate, et ne coche pas Not Toxic. Ce genre d’exemple illustre la capacité du modèle à capturer plusieurs facettes de la toxicité dans une même phrase.",
+
+  "article.nlp.limitations.title": "6. Limites du modèle",
+  "article.nlp.limitations.text": "Plusieurs limites importantes subsistent : la somme des embeddings perd l’ordre des mots et la structure grammaticale, les classes rares présentent des F1-scores faibles, et le MLP ne peut pas capturer des dépendances longues distance ni le sous-entendu contextuel. De plus, les embeddings préentraînés ne sont pas adaptés au domaine spécifique de la toxicité et ne sont pas fine-tunés pendant l’entraînement.",
+
+  "article.nlp.future.title": "7. Pistes d'amélioration",
+  "article.nlp.future.text": "Parmi les améliorations possibles : remplacer la somme d’embeddings par des modèles de type transformers (BERT, RoBERTa), introduire des mécanismes d’attention pour mieux exploiter le contexte, augmenter artificiellement les données pour les classes rares, expérimenter des modèles linéaires sur TF-IDF, ou tester des variantes d’optimisation comme AdamW et des schedulers de taux d’apprentissage.",
+
+  "article.nlp.structure.title": "8. Organisation du dépôt",
+  "article.nlp.structure.text": ".\n├── Train_model.py\n├── Use_model.py\n├── README.md\n├── /images\n├── /graphs\n└── NLP_BEST_Model.pkl",
+
+  "article.nlp.note.title": "9. Note personnelle",
+  "article.nlp.note.text": "Ce projet m’a permis d’approfondir ma compréhension des pipelines NLP classiques, des embeddings préentraînés, de la classification multi-label et de l’optimisation de réseaux de neurones. Il montre qu’une architecture simple peut être étonnamment efficace lorsqu’elle est associée à un prétraitement solide et à une évaluation rigoureuse.",
+
+  "article.audio.back": "← Retour",
+
+  "article.audio.title": "Classification d’instruments de musique – Deep Learning",
+  "article.audio.subtitle": "Pipeline complet de classification audio : nettoyage du signal, extraction MFCC, entraînement d’un CNN et prédiction par fenêtres temporelles.",
+
+  "article.audio.overview.title": "1. Vue d'ensemble",
+  "article.audio.overview.text": "Objectif : reconnaître automatiquement un instrument de musique à partir d’un fichier audio. L’audio est une donnée temporelle continue, et le cœur du projet consiste à transformer le signal brut en une représentation robuste, puis à entraîner un modèle de deep learning capable de généraliser sur des variations d’enregistrements.",
+
+  "article.audio.dataset.title": "2. Données",
+  "article.audio.dataset.text": "Le dataset provient d’une compétition Kaggle dédiée aux instruments de musique. Chaque fichier audio est labellisé (piano, guitare, violon, batterie, etc.). Les défis principaux sont la variabilité des enregistrements et un léger déséquilibre entre certaines classes.",
+
+  "article.audio.preprocessing.title": "3. Prétraitement et EDA",
+  "article.audio.preprocessing.text": "Avant l’entraînement, l’audio est exploré sous plusieurs angles : signal temporel, FFT, banques de filtres, et MFCC. Un nettoyage par enveloppe du signal permet d’éliminer automatiquement les silences et de conserver les segments informatifs.",
+
+  "article.audio.features.title": "4. Caractéristiques : MFCC",
+  "article.audio.features.text": "Les MFCC servent d’entrée au modèle. Ils résument l’information fréquentielle utile tout en produisant une représentation 2D (temps × coefficients) exploitable par un réseau convolutionnel.",
+
+  "article.audio.model.title": "5. Modèle",
+  "article.audio.model.text": "Le classifieur est un CNN Keras composé de plusieurs couches de convolution, d’un max pooling, de dropout, puis de couches denses. L’idée est d’apprendre des motifs locaux dans la représentation MFCC (comme sur une image) puis d’agréger ces informations pour prédire l’instrument.",
+
+  "article.audio.training.title": "6. Entraînement et résultats",
+  "article.audio.training.text": "L’entraînement est réalisé sur des fenêtres audio échantillonnées aléatoirement afin d’augmenter la diversité des exemples vus par le réseau. Une pondération des classes est appliquée pour limiter l’impact des classes sous-représentées. Le modèle atteint une accuracy d’environ 93%.",
+
+  "article.audio.prediction.title": "7. Prédiction",
+  "article.audio.prediction.text": "En inférence, l’audio est découpé en fenêtres successives, chaque fenêtre est transformée en MFCC, normalisée comme à l’entraînement, puis passée au modèle. Les probabilités sont ensuite moyennées sur le fichier complet pour produire une prédiction stable. Les résultats sont exportés dans un fichier CSV.",
+
+  "article.audio.conclusion.title": "8. Conclusion et suites",
+  "article.audio.conclusion.text": "Le projet couvre toute la chaîne : traitement du signal, feature engineering, apprentissage profond et inférence. Pistes possibles : data augmentation audio, mel-spectrogrammes complets, architectures CRNN (CNN + RNN), ou déploiement en temps réel.",
+
+  "article.audio.fig.envelope.caption": "Nettoyage par enveloppe : signal brut vs segments conservés",
+  "article.audio.fig.time.caption": "Signal temporel (exemple)",
+  "article.audio.fig.fft.caption": "Transformée de Fourier (FFT) : signature fréquentielle",
+  "article.audio.fig.fbank.caption": "Banque de filtres (filter bank)",
+  "article.audio.fig.mfcc.caption": "MFCC : représentation temps × coefficients",
+  "article.audio.fig.pipeline.caption": "Pipeline : audio → MFCC → CNN → probabilités"
+}
