@@ -1,0 +1,22 @@
+{
+  "card.audio.title": "Classification d'instruments de musique",
+  "card.audio.meta": "Deep learning · Audio",
+  "card.audio.desc": "CNN entraîné sur des caractéristiques MFCC pour reconnaître différents instruments à partir d’enregistrements audio courts.",
+  "card.audio.tag.python": "Python",
+  "card.audio.tag.keras": "Keras",
+  "card.audio.tag.librosa": "Librosa",
+
+  "card.site.title": "Analyse de données de chantier",
+  "card.site.meta": "Computer vision · Sécurité",
+  "card.site.desc": "Détection de situations à risque sur des images de chantier, agrégation des incidents et visualisation via tableau de bord.",
+  "card.site.tag.pandas": "Pandas",
+  "card.site.tag.vision": "Vision",
+  "card.site.tag.powerbi": "Power BI",
+
+  "card.nlp.title": "Toxic Comment Classification – NLP",
+  "card.nlp.meta": "NLP · Multi-label",
+  "card.nlp.desc": "Détection automatique de toxicité dans des commentaires en ligne à l’aide d’embeddings spaCy et d’un réseau de neurones léger.",
+  "card.nlp.tag.python": "Python",
+  "card.nlp.tag.spacy": "spaCy",
+  "card.nlp.tag.mlp": "MLP"
+}
