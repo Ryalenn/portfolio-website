@@ -1,0 +1,22 @@
+{
+  "card.audio.title": "Music Instrument Classification",
+  "card.audio.meta": "Deep learning · Audio",
+  "card.audio.desc": "Neural network trained on spectrograms to recognize different instruments from short audio recordings.",
+  "card.audio.tag.python": "Python",
+  "card.audio.tag.keras": "Keras",
+  "card.audio.tag.librosa": "Librosa",
+
+  "card.site.title": "Construction Site Data Analysis",
+  "card.site.meta": "Computer vision · Safety",
+  "card.site.desc": "Detection of risky situations on construction site images, incident aggregation, and dashboard visualization.",
+  "card.site.tag.pandas": "Pandas",
+  "card.site.tag.vision": "Vision",
+  "card.site.tag.powerbi": "Power BI",
+
+  "card.nlp.title": "Toxic Comment Classification – NLP",
+  "card.nlp.meta": "NLP · Multi-label",
+  "card.nlp.desc": "Automatic toxicity detection in online comments using spaCy embeddings and a lightweight neural network.",
+  "card.nlp.tag.python": "Python",
+  "card.nlp.tag.spacy": "spaCy",
+  "card.nlp.tag.mlp": "MLP"
+}
