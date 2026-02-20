@@ -1,0 +1,37 @@
+{
+  "article.audio.back": "← Back",
+
+  "article.audio.title": "Music Instrument Classification – Deep Learning",
+  "article.audio.subtitle": "End-to-end audio classification pipeline: signal cleaning, MFCC extraction, CNN training, and sliding-window inference.",
+
+  "article.audio.overview.title": "1. Overview",
+  "article.audio.overview.text": "Goal: automatically recognize a musical instrument from an audio file. Audio is a continuous time-based signal, and the core of this project is to turn raw waveforms into a robust representation, then train a deep learning model that generalizes across recording variations.",
+
+  "article.audio.dataset.title": "2. Data",
+  "article.audio.dataset.text": "The dataset comes from a Kaggle competition focused on musical instrument classification. Each audio file is labeled (piano, guitar, violin, drums, etc.). Key challenges include recording variability and slight class imbalance.",
+
+  "article.audio.preprocessing.title": "3. Preprocessing and EDA",
+  "article.audio.preprocessing.text": "Before training, the audio is explored through several views: time-domain signal, FFT, filter banks, and MFCC. A signal envelope is used to remove silence segments and keep only informative parts of the recordings.",
+
+  "article.audio.features.title": "4. Features: MFCC",
+  "article.audio.features.text": "MFCCs are used as model inputs. They summarize useful spectral information while producing a 2D representation (time × coefficients) that works well with convolutional networks.",
+
+  "article.audio.model.title": "5. Model",
+  "article.audio.model.text": "The classifier is a Keras CNN made of several convolution layers, max pooling, dropout, and dense layers. The idea is to learn local patterns from the MFCC representation (similar to an image) and then aggregate them to predict the instrument.",
+
+  "article.audio.training.title": "6. Training and results",
+  "article.audio.training.text": "Training is performed on randomly sampled audio windows to increase the diversity of examples seen by the network. Class weighting is used to reduce the impact of under-represented classes. The model reaches roughly 93% accuracy.",
+
+  "article.audio.prediction.title": "7. Inference",
+  "article.audio.prediction.text": "At inference time, audio is split into successive windows. Each window is converted to MFCC, normalized exactly like during training, and passed through the model. Probabilities are averaged across the whole file to produce a stable prediction. Results are exported to a CSV file.",
+
+  "article.audio.conclusion.title": "8. Conclusion and next steps",
+  "article.audio.conclusion.text": "This project covers the full chain: signal processing, feature engineering, deep learning training, and inference. Possible extensions: audio data augmentation, full mel-spectrograms, CRNN architectures (CNN + RNN), or real-time deployment.",
+
+  "article.audio.fig.envelope.caption": "Envelope-based cleaning: raw signal vs retained segments",
+  "article.audio.fig.time.caption": "Time-domain signal (example)",
+  "article.audio.fig.fft.caption": "Fourier Transform (FFT): frequency signature",
+  "article.audio.fig.fbank.caption": "Filter bank coefficients",
+  "article.audio.fig.mfcc.caption": "MFCC: time × coefficients representation",
+  "article.audio.fig.pipeline.caption": "Pipeline: audio → MFCC → CNN → probabilities"
+}
