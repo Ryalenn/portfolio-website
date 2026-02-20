@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Classification d'instruments de musique – Deep Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #050505;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- ASCII BACKGROUND (static dots) ---------- */
+    #ascii-background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: #000;
+      pointer-events: none;
+      opacity: 0.25;
+    }
+
+    #ascii-canvas {
+      position: absolute;
+      inset: 0;
+      white-space: pre;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 10px;
+      line-height: 1;
+      color: #1f2933;
+      user-select: none;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .overlay {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ---------- HEADER ---------- */
+    .site-header {
+      position: relative;
+      margin-bottom: 2rem;
+      padding: 1rem 1.25rem;
+      background: #000;
+      border: 1px solid #ffffff;
+      border-radius: 0;
+    }
+
+    .site-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .site-subtitle { font-size: 0.9rem; opacity: 1; }
+
+    .lang-switch {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.9rem;
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .lang-btn {
+      min-width: 32px;
+      height: 22px;
+      border: 1px solid #fff;
+      background: #000;
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0 6px;
+      opacity: 0.4;
+      transition: opacity 0.15s ease-out, transform 0.1s ease-out;
+    }
+
+    .lang-btn.active {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    /* ---------- ARTICLE ---------- */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      text-decoration: underline;
+    }
+
+    .article {
+      background: #000;
+      border: 1px solid #ffffff;
+      border-radius: 0;
+      padding: 1.6rem;
+    }
+
+    .article-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .article-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1.4rem;
+    }
+
+    .article section { margin-bottom: 1.8rem; }
+
+    .article h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .article h3 {
+      font-size: 1.05rem;
+      margin: 0.9rem 0 0.4rem;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    .article p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .article ul {
+      margin-left: 1.1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* ---------- FIGURES ---------- */
+    figure.figure {
+      margin: 1rem auto 0.4rem;
+      border: 1px solid #ffffff;
+      background: #000;
+      padding: 0.75rem;
+      max-width: 600px;
+    }
+
+    figure.figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    figure.figure figcaption {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.4rem;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    /* ---------- SIDE BY SIDE GRAPHS ---------- */
+    .figures-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 0.8rem;
+    }
+
+    figure.figure.small {
+      max-width: 360px;
+      flex: 1 1 0;
+    }
+
+    /* ---------- CODE / STRUCTURE ---------- */
+    .repo-structure {
+      background: #050505;
+      border: 1px solid #ffffff;
+      padding: 0.8rem 1rem;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      white-space: pre;
+    }
+
+    @media (max-width: 768px) {
+      .overlay { padding-inline: 1rem; }
+      .article { padding: 1.2rem; }
+
+      .figures-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      figure.figure.small {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<!-- ✅ scope i18n de la page -->
+<body data-i18n-scope="pages/instruments">
+
+  <!-- ASCII background -->
+  <div id="ascii-background" aria-hidden="true">
+    <pre id="ascii-canvas"></pre>
+  </div>
+
+  <div class="overlay">
+    <div class="page-container">
+
+      <header class="site-header">
+        <div class="site-title" data-i18n="site.title"></div>
+        <p class="site-subtitle" data-i18n="site.subtitle"></p>
+
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="fr" id="btn-fr" aria-label="Français">FR</button>
+          <button class="lang-btn" data-lang="en" id="btn-en" aria-label="English">EN</button>
+        </div>
+      </header>
+
+      <!-- ✅ retour vers index (on est dans /pages/) -->
+      <a href="../index.html" class="back-link" data-i18n="article.audio.back"></a>
+
+      <article class="article">
+        <h1 class="article-title" data-i18n="article.audio.title"></h1>
+        <p class="article-subtitle" data-i18n="article.audio.subtitle"></p>
+
+        <!-- OVERVIEW -->
+        <section>
+          <h2 data-i18n="article.audio.overview.title"></h2>
+          <p data-i18n="article.audio.overview.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/instruments/audio_pipeline.svg" alt="Audio pipeline">
+            <figcaption data-i18n="article.audio.fig.pipeline.caption"></figcaption>
+          </figure>
+        </section>
+
+        <!-- DATASET -->
+        <section>
+          <h2 data-i18n="article.audio.dataset.title"></h2>
+          <p data-i18n="article.audio.dataset.text"></p>
+        </section>
+
+        <!-- PREPROCESSING / EDA -->
+        <section>
+          <h2 data-i18n="article.audio.preprocessing.title"></h2>
+          <p data-i18n="article.audio.preprocessing.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/instruments/audio_envelope.png" alt="Envelope cleaning">
+            <figcaption data-i18n="article.audio.fig.envelope.caption"></figcaption>
+          </figure>
+
+          <div class="figures-row">
+            <figure class="figure small">
+              <img src="../assets/img/instruments/audio_time.png" alt="Time series">
+              <figcaption data-i18n="article.audio.fig.time.caption"></figcaption>
+            </figure>
+
+            <figure class="figure small">
+              <img src="../assets/img/instruments/audio_fft.png" alt="FFT">
+              <figcaption data-i18n="article.audio.fig.fft.caption"></figcaption>
+            </figure>
+          </div>
+
+          <div class="figures-row">
+            <figure class="figure small">
+              <img src="../assets/img/instruments/audio_fbank.png" alt="Filter bank">
+              <figcaption data-i18n="article.audio.fig.fbank.caption"></figcaption>
+            </figure>
+
+            <figure class="figure small">
+              <img src="../assets/img/instruments/audio_mfcc.png" alt="MFCC">
+              <figcaption data-i18n="article.audio.fig.mfcc.caption"></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section>
+          <h2 data-i18n="article.audio.features.title"></h2>
+          <p data-i18n="article.audio.features.text"></p>
+        </section>
+
+        <!-- MODEL -->
+        <section>
+          <h2 data-i18n="article.audio.model.title"></h2>
+          <p data-i18n="article.audio.model.text"></p>
+        </section>
+
+        <!-- TRAINING -->
+        <section>
+          <h2 data-i18n="article.audio.training.title"></h2>
+          <p data-i18n="article.audio.training.text"></p>
+        </section>
+
+        <!-- PREDICTION -->
+        <section>
+          <h2 data-i18n="article.audio.prediction.title"></h2>
+          <p data-i18n="article.audio.prediction.text"></p>
+        </section>
+
+        <!-- CONCLUSION -->
+        <section>
+          <h2 data-i18n="article.audio.conclusion.title"></h2>
+          <p data-i18n="article.audio.conclusion.text"></p>
+        </section>
+
+        <!-- STRUCTURE -->
+        <section>
+          <h2>Organisation du projet</h2>
+          <div class="repo-structure">
+.
+├── cfg.py
+├── eda.py
+├── model.py
+├── predict.py
+├── instruments.csv
+├── predictions.csv
+├── /wavfiles
+├── /clean
+├── /models
+└── /pickles
+          </div>
+        </section>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ✅ ASCII background JS -->
+  <script src="../assets/js/ascii-wave.js"></script>
+
+  <!-- ✅ i18n -->
+  <script src="../assets/js/lang.js"></script>
+</body>
+</html>
