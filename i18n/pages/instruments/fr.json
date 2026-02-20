@@ -1,0 +1,37 @@
+{
+  "article.audio.back": "← Retour",
+
+  "article.audio.title": "Classification d’instruments de musique – Deep Learning",
+  "article.audio.subtitle": "Pipeline complet de classification audio : nettoyage du signal, extraction MFCC, entraînement d’un CNN et prédiction par fenêtres temporelles.",
+
+  "article.audio.overview.title": "1. Vue d'ensemble",
+  "article.audio.overview.text": "Objectif : reconnaître automatiquement un instrument de musique à partir d’un fichier audio. L’audio est une donnée temporelle continue, et le cœur du projet consiste à transformer le signal brut en une représentation robuste, puis à entraîner un modèle de deep learning capable de généraliser sur des variations d’enregistrements.",
+
+  "article.audio.dataset.title": "2. Données",
+  "article.audio.dataset.text": "Le dataset provient d’une compétition Kaggle dédiée aux instruments de musique. Chaque fichier audio est labellisé (piano, guitare, violon, batterie, etc.). Les défis principaux sont la variabilité des enregistrements et un léger déséquilibre entre certaines classes.",
+
+  "article.audio.preprocessing.title": "3. Prétraitement et EDA",
+  "article.audio.preprocessing.text": "Avant l’entraînement, l’audio est exploré sous plusieurs angles : signal temporel, FFT, banques de filtres, et MFCC. Un nettoyage par enveloppe du signal permet d’éliminer automatiquement les silences et de conserver les segments informatifs.",
+
+  "article.audio.features.title": "4. Caractéristiques : MFCC",
+  "article.audio.features.text": "Les MFCC servent d’entrée au modèle. Ils résument l’information fréquentielle utile tout en produisant une représentation 2D (temps × coefficients) exploitable par un réseau convolutionnel.",
+
+  "article.audio.model.title": "5. Modèle",
+  "article.audio.model.text": "Le classifieur est un CNN Keras composé de plusieurs couches de convolution, d’un max pooling, de dropout, puis de couches denses. L’idée est d’apprendre des motifs locaux dans la représentation MFCC (comme sur une image) puis d’agréger ces informations pour prédire l’instrument.",
+
+  "article.audio.training.title": "6. Entraînement et résultats",
+  "article.audio.training.text": "L’entraînement est réalisé sur des fenêtres audio échantillonnées aléatoirement afin d’augmenter la diversité des exemples vus par le réseau. Une pondération des classes est appliquée pour limiter l’impact des classes sous-représentées. Le modèle atteint une accuracy d’environ 93%.",
+
+  "article.audio.prediction.title": "7. Prédiction",
+  "article.audio.prediction.text": "En inférence, l’audio est découpé en fenêtres successives, chaque fenêtre est transformée en MFCC, normalisée comme à l’entraînement, puis passée au modèle. Les probabilités sont ensuite moyennées sur le fichier complet pour produire une prédiction stable. Les résultats sont exportés dans un fichier CSV.",
+
+  "article.audio.conclusion.title": "8. Conclusion et suites",
+  "article.audio.conclusion.text": "Le projet couvre toute la chaîne : traitement du signal, feature engineering, apprentissage profond et inférence. Pistes possibles : data augmentation audio, mel-spectrogrammes complets, architectures CRNN (CNN + RNN), ou déploiement en temps réel.",
+
+  "article.audio.fig.envelope.caption": "Nettoyage par enveloppe : signal brut vs segments conservés",
+  "article.audio.fig.time.caption": "Signal temporel (exemple)",
+  "article.audio.fig.fft.caption": "Transformée de Fourier (FFT) : signature fréquentielle",
+  "article.audio.fig.fbank.caption": "Banque de filtres (filter bank)",
+  "article.audio.fig.mfcc.caption": "MFCC : représentation temps × coefficients",
+  "article.audio.fig.pipeline.caption": "Pipeline : audio → MFCC → CNN → probabilités"
+}
