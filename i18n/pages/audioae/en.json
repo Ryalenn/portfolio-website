@@ -1,0 +1,45 @@
+{
+  "article.audioae.back": "← Back",
+
+  "article.audioae.title": "Audio Autoencoder on Mel Spectrograms – Deep Learning",
+  "article.audioae.subtitle": "Self-supervised audio representation learning project: signal preprocessing, log-mel spectrogram conversion, convolutional autoencoder training, and approximate audio reconstruction.",
+
+  "article.audioae.overview.title": "1. Overview",
+  "article.audioae.overview.text": "Goal: learn a compact representation of audio signals without labels by training an autoencoder to reconstruct mel spectrograms. The project shows how to move from a raw waveform to a time-frequency representation suitable for convolutional networks, and how to evaluate reconstruction quality both visually and by listening.",
+
+  "article.audioae.dataset.title": "2. Data",
+  "article.audioae.dataset.text": "The project uses the TinySOL dataset, which contains monophonic recordings of isolated musical instruments. Each audio excerpt is resampled to 16 kHz, trimmed or padded to a fixed duration of one second, and amplitude-normalized to provide homogeneous inputs and stabilize training.",
+
+  "article.audioae.preprocessing.title": "3. Audio preprocessing",
+  "article.audioae.preprocessing.text": "Each waveform is converted into a mel spectrogram using an STFT, then compressed on a logarithmic scale. This makes the representation more compact, numerically stable, and better suited to learning meaningful spectral patterns.",
+
+  "article.audioae.representation.title": "4. Representation: log-mel spectrograms",
+  "article.audioae.representation.text": "Using log-mel spectrograms transforms a 1D audio signal into a structured 2D representation that works naturally with convolutional layers. Compared to raw waveform modeling, this representation is easier to learn from, easier to visualize, and more appropriate for a first audio autoencoder project.",
+
+  "article.audioae.model.title": "5. Model",
+  "article.audioae.model.text": "The model is a 2D convolutional autoencoder. The encoder progressively reduces the spatial size of the spectrogram to produce a compact latent vector, while the decoder reconstructs the input spectrogram from this representation. The dense bottleneck forces the network to compress the most relevant information in the signal.",
+
+  "article.audioae.training.title": "6. Training",
+  "article.audioae.training.text": "The model is trained on the full dataset with a reconstruction loss combining MSE and L1 in order to balance optimization stability and detail preservation. Time dimensions are padded to the next multiple of 8 so that the downsampling and upsampling stages remain dimensionally consistent throughout the network.",
+
+  "article.audioae.inference.title": "7. Inference and evaluation",
+  "article.audioae.inference.text": "At inference time, a validation mel spectrogram is passed through the autoencoder and compared to its reconstruction. Evaluation is performed at two levels: visually, by comparing original and reconstructed spectrograms; and audibly, by approximately converting them back to waveform using InverseMelScale and Griffin-Lim. This audio reconstruction remains imperfect because phase information is not directly modeled.",
+
+  "article.audioae.results.title": "8. Results",
+  "article.audioae.results.text": "The model is able to reconstruct the global harmonic structure of the excerpts, with reconstructed spectrograms that remain visually close to the inputs. The reconstructed audio is more degraded than the spectrogram itself, which highlights both the difficulty of mel-spectrogram inversion and the importance of phase information in perceived sound quality.",
+
+  "article.audioae.conclusion.title": "9. Conclusion and next steps",
+  "article.audioae.conclusion.text": "This project provides a solid first step into self-supervised learning for audio. Possible extensions include increasing spectral resolution, experimenting with a variational autoencoder, analyzing the latent space, retrieving nearest neighbors in latent space, or using a neural vocoder to improve final audio reconstruction quality.",
+
+  "article.audioae.fig.waveform.caption": "Preprocessed waveform: one-second audio excerpt",
+  "article.audioae.fig.melspec.caption": "Log-mel spectrogram: input time-frequency representation",
+  "article.audioae.fig.pipeline.caption": "Pipeline: waveform → mel spectrogram → autoencoder → reconstructed spectrogram",
+  "article.audioae.fig.architecture.caption": "2D convolutional autoencoder architecture",
+  "article.audioae.fig.reconstruction.caption": "Comparison between original and reconstructed spectrograms",
+  "article.audioae.fig.error.caption": "Absolute error map between input and reconstruction",
+  "article.audioae.fig.loss.caption": "Training curves: reconstruction loss on train and validation sets",
+
+  "article.audioae.audio.original.caption": "Original preprocessed audio",
+  "article.audioae.audio.from_original_spec.caption": "Audio reconstructed from the original spectrogram",
+  "article.audioae.audio.from_reconstructed_spec.caption": "Audio reconstructed from the autoencoder output spectrogram"
+}
