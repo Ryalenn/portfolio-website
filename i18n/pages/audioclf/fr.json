@@ -1,0 +1,40 @@
+{
+  "article.audioclf.back": "← Retour",
+
+  "article.audioclf.title": "Fine-tuning de DistilHuBERT pour la classification de genres musicaux",
+  "article.audioclf.subtitle": "Projet de deep learning audio : chargement et prétraitement du dataset GTZAN, adaptation d’un transformer audio préentraîné, entraînement supervisé pour la classification multi-classes et analyse des performances sur jeu de test.",
+
+  "article.audioclf.overview.title": "1. Vue d'ensemble",
+  "article.audioclf.overview.text": "Objectif : classifier automatiquement des extraits musicaux selon leur genre à l’aide d’un modèle transformer audio préentraîné. Le projet montre comment partir de waveforms bruts, les adapter au format attendu par DistilHuBERT, puis fine-tuner un classifieur sur GTZAN afin d’obtenir un modèle capable de discriminer 10 genres musicaux.",
+
+  "article.audioclf.dataset.title": "2. Données",
+  "article.audioclf.dataset.text": "Le projet utilise GTZAN, un dataset classique de classification musicale composé de 1000 extraits audio répartis en 10 genres. Chaque morceau correspond à un extrait de 30 secondes. Le dataset étant relativement équilibré, un découpage train/test simple permet d’évaluer proprement le comportement du modèle sur des données non vues.",
+
+  "article.audioclf.preprocessing.title": "3. Prétraitement audio",
+  "article.audioclf.preprocessing.text": "Les extraits sont resamplés à 16 kHz pour correspondre aux contraintes du modèle préentraîné. Le prétraitement est appliqué à la volée via le feature extractor : les signaux sont tronqués ou ajustés à la durée cible, normalisés selon les conventions du modèle, puis convertis en tenseurs exploitables par le transformer. Cette approche évite de stocker les features précomputées et garde un pipeline compact.",
+
+  "article.audioclf.model.title": "4. Modèle",
+  "article.audioclf.model.text": "Le cœur du projet repose sur DistilHuBERT, une version plus légère de HuBERT, adaptée ici à une tâche de classification audio en 10 classes. La tête de classification d’origine est remplacée pour correspondre au nombre de genres musicaux du dataset. Le fine-tuning permet de réutiliser des représentations audio apprises en amont sur de grands corpus, tout en spécialisant le modèle pour la reconnaissance de styles musicaux.",
+
+  "article.audioclf.training.title": "5. Entraînement",
+  "article.audioclf.training.text": "L’entraînement est effectué avec le Trainer de Hugging Face. Le notebook définit explicitement les hyperparamètres principaux : batch size, gradient accumulation, learning rate, scheduler linéaire, weight decay et évaluation à chaque époque. L’accuracy est utilisée comme métrique principale, ce qui est cohérent avec le caractère équilibré du dataset.",
+
+  "article.audioclf.inference.title": "6. Évaluation",
+  "article.audioclf.inference.text": "Après entraînement, le modèle est évalué sur le jeu de test. L’analyse ne se limite pas à une accuracy globale : une matrice de confusion et un classification report permettent d’identifier les genres bien séparés et ceux qui restent plus ambigus. Cette étape est importante car certaines classes musicales partagent des signatures acoustiques proches, ce qui rend leur séparation plus difficile.",
+
+  "article.audioclf.results.title": "7. Résultats",
+  "article.audioclf.results.text": "Le notebook atteint une accuracy de test d’environ 87 %, ce qui constitue un bon résultat sur ce problème avec un modèle compact. Les genres les plus distinctifs sont généralement bien reconnus, tandis que certaines confusions persistent entre styles plus proches. Les courbes d’entraînement permettent également de vérifier la dynamique d’apprentissage et d’estimer la présence éventuelle d’overfitting.",
+
+  "article.audioclf.conclusion.title": "8. Conclusion et suites",
+  "article.audioclf.conclusion.text": "Ce projet illustre l’intérêt du transfer learning en audio : au lieu d’entraîner un modèle depuis zéro, on adapte un transformer déjà préentraîné pour une tâche ciblée. La démarche permet d’obtenir rapidement de bonnes performances sur un dataset de taille modérée. Des prolongements naturels seraient l’ajout de vraies augmentations audio, la comparaison avec d’autres backbones, ou encore l’export du modèle vers une petite interface d’inférence.",
+
+  "article.audioclf.structure.title": "Project structure",
+
+  "article.audioclf.fig.pipeline.caption": "Pipeline global : waveform → feature extractor → DistilHuBERT fine-tuné → prédiction de genre",
+  "article.audioclf.fig.classdist.caption": "Répartition des extraits par genre dans le dataset",
+  "article.audioclf.fig.waveform.caption": "Exemple de waveform sur un extrait GTZAN",
+  "article.audioclf.fig.melspec.caption": "Visualisation temps-fréquence d’un extrait audio",
+  "article.audioclf.fig.architecture.caption": "Schéma simplifié du modèle de classification basé sur DistilHuBERT",
+  "article.audioclf.fig.loss.caption": "Courbes d’entraînement : loss et accuracy de validation",
+  "article.audioclf.fig.confusion.caption": "Matrice de confusion sur le jeu de test"
+}
