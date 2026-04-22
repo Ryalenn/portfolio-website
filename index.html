@@ -27,7 +27,7 @@
       text-decoration: none;
     }
 
-    /* ---------- ASCII BACKGROUND ---------- */
+    /* ASCII BACKGROUND  */
     #ascii-background {
       position: fixed;
       inset: 0;
@@ -51,7 +51,7 @@
       user-select: none;
     }
 
-    /* ---------- CONTENT ---------- */
+    /*  CONTENT  */
     .overlay {
       position: relative;
       z-index: 1;
@@ -64,7 +64,7 @@
       margin: 0 auto;
     }
 
-    /* ---------- HEADER ---------- */
+    /*  HEADER */
     .site-header {
       position: relative;
       margin-bottom: 2rem;
@@ -85,7 +85,7 @@
       opacity: 1;
     }
 
-    /* ---------- LANGUAGE SWITCH ---------- */
+    /*  LANGUAGE SWITCH */
     .lang-switch {
       position: absolute;
       top: 0.75rem;
@@ -123,7 +123,7 @@
       transform: translateY(-1px);
     }
 
-    /* ---------- PROJECT CARDS ---------- */
+    /* PROJECT CARDS  */
     .projects {
       margin-top: 2rem;
       display: flex;
@@ -196,7 +196,7 @@
       transform: translateY(1px);
     }
 
-    /* ---------- MOBILE ---------- */
+    /*  MOBILE  */
     @media (max-width: 768px) {
       .overlay {
         padding-inline: 1rem;
@@ -218,10 +218,10 @@
   </style>
 </head>
 
-<!-- ✅ scope i18n de la page index -->
+<!--  i18n  -->
 <body data-i18n-scope="pages/index">
 
-  <!-- Fond ASCII -->
+  <!-- ASCII -->
   <div id="ascii-background" aria-hidden="true">
     <pre id="ascii-canvas"></pre>
   </div>
@@ -242,7 +242,25 @@
       </header>
 
       <main class="projects">
-
+        <!-- Projet Autoencoder Audio -->
+        <a class="project-card"
+           href="pages/audio-autoencoder.html"
+           target="_blank" rel="noopener noreferrer">
+          <h2 class="project-title" data-i18n="card.audioae.title"></h2>
+          <div class="project-meta" data-i18n="card.audioae.meta"></div>
+          <p class="project-description" data-i18n="card.audioae.desc"></p>
+          <div class="project-tags">
+            <span class="tag" data-i18n="card.audioae.tag.python"></span>
+            <span class="tag" data-i18n="card.audioae.tag.pytorch"></span>
+            <span class="tag" data-i18n="card.audioae.tag.audio"></span>
+            <span class="tag" data-i18n="card.audioae.tag.autoencoder"></span>
+          </div>
+          <div class="project-footer">
+            <span data-i18n="card.article"></span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+        
         <!-- Projet Audio -->
         <a class="project-card"
            href="pages/instruments.html"
@@ -284,7 +302,7 @@
     </div>
   </div>
 
-  <!-- ✅ scripts dans assets/js -->
+  <!-- scripts dans assets/js -->
   <script src="assets/js/ascii-wave.js"></script>
   <script src="assets/js/lang.js"></script>
 </body>
