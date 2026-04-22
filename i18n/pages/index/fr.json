@@ -12,7 +12,7 @@
   "card.nlp.desc": "Détection automatique de toxicité dans des commentaires en ligne à l’aide d’embeddings spaCy et d’un réseau de neurones léger.",
   "card.nlp.tag.python": "Python",
   "card.nlp.tag.spacy": "spaCy",
-  "card.nlp.tag.mlp": "MLP"
+  "card.nlp.tag.mlp": "MLP",
 
   "card.audioae.title": "Autoencodeur audio sur mel-spectrogrammes",
   "card.audioae.meta": "Deep learning · Audio · Représentation",
