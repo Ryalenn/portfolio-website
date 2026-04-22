@@ -18,7 +18,7 @@
 
     a { color: inherit; text-decoration: none; }
 
-    /* ---------- ASCII BACKGROUND (static dots) ---------- */
+    /*  ASCII BACKGROUND (static dots) */
     #ascii-background {
       position: fixed;
       inset: 0;
@@ -39,7 +39,7 @@
       user-select: none;
     }
 
-    /* ---------- LAYOUT ---------- */
+    /*  LAYOUT */
     .overlay {
       position: relative;
       z-index: 1;
@@ -52,7 +52,7 @@
       margin: 0 auto;
     }
 
-    /* ---------- HEADER ---------- */
+    /*  HEADER  */
     .site-header {
       position: relative;
       margin-bottom: 2rem;
@@ -98,7 +98,7 @@
       transform: translateY(-1px);
     }
 
-    /* ---------- ARTICLE ---------- */
+    /*  ARTICLE  */
     .back-link {
       display: inline-block;
       margin-bottom: 1rem;
@@ -152,7 +152,7 @@
       line-height: 1.5;
     }
 
-    /* ---------- FIGURES ---------- */
+    /*  FIGURES  */
     figure.figure {
       margin: 1rem auto 0.4rem;
       border: 1px solid #ffffff;
@@ -175,7 +175,7 @@
       line-height: 1.35;
     }
 
-    /* ---------- SIDE BY SIDE GRAPHS ---------- */
+    /*  SIDE BY SIDE GRAPHS  */
     .figures-row {
       display: flex;
       gap: 1rem;
@@ -189,7 +189,7 @@
       flex: 1 1 0;
     }
 
-    /* ---------- CODE / STRUCTURE ---------- */
+    /*  CODE / STRUCTURE  */
     .repo-structure {
       background: #050505;
       border: 1px solid #ffffff;
@@ -215,7 +215,7 @@
   </style>
 </head>
 
-<!-- ✅ scope i18n de la page -->
+<!--scope i18n -->
 <body data-i18n-scope="pages/instruments">
 
   <!-- ASCII background -->
@@ -236,7 +236,7 @@
         </div>
       </header>
 
-      <!-- ✅ retour vers index (on est dans /pages/) -->
+      <!--retour-->
       <a href="../index.html" class="back-link" data-i18n="article.audio.back"></a>
 
       <article class="article">
@@ -248,10 +248,7 @@
           <h2 data-i18n="article.audio.overview.title"></h2>
           <p data-i18n="article.audio.overview.text"></p>
 
-          <figure class="figure">
-            <img src="../assets/img/instruments/audio_pipeline.svg" alt="Audio pipeline">
-            <figcaption data-i18n="article.audio.fig.pipeline.caption"></figcaption>
-          </figure>
+          
         </section>
 
         <!-- DATASET -->
@@ -347,10 +344,10 @@
     </div>
   </div>
 
-  <!-- ✅ ASCII background JS -->
+  <!--ASCII background JS -->
   <script src="../assets/js/ascii-wave.js"></script>
 
-  <!-- ✅ i18n -->
+  <!-- i18n -->
   <script src="../assets/js/lang.js"></script>
 </body>
 </html>
