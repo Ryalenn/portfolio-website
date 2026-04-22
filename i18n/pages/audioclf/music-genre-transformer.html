@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fine-tuning DistilHuBERT sur GTZAN – Deep Learning Audio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #050505;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    #ascii-background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: #000;
+      pointer-events: none;
+      opacity: 0.25;
+    }
+
+    #ascii-canvas {
+      position: absolute;
+      inset: 0;
+      white-space: pre;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 10px;
+      line-height: 1;
+      color: #1f2933;
+      user-select: none;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: relative;
+      margin-bottom: 2rem;
+      padding: 1rem 1.25rem;
+      background: #000;
+      border: 1px solid #ffffff;
+      border-radius: 0;
+    }
+
+    .site-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .site-subtitle {
+      font-size: 0.9rem;
+      opacity: 1;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.9rem;
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .lang-btn {
+      min-width: 32px;
+      height: 22px;
+      border: 1px solid #fff;
+      background: #000;
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0 6px;
+      opacity: 0.4;
+      transition: opacity 0.15s ease-out, transform 0.1s ease-out;
+    }
+
+    .lang-btn.active {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      text-decoration: underline;
+    }
+
+    .article {
+      background: #000;
+      border: 1px solid #ffffff;
+      border-radius: 0;
+      padding: 1.6rem;
+    }
+
+    .article-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .article-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1.4rem;
+    }
+
+    .article section { margin-bottom: 1.8rem; }
+
+    .article h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .article h3 {
+      font-size: 1.05rem;
+      margin: 0.9rem 0 0.4rem;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    .article p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+      white-space: pre-line;
+    }
+
+    .article ul {
+      margin-left: 1.1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    figure.figure {
+      margin: 1rem auto 0.4rem;
+      border: 1px solid #ffffff;
+      background: #000;
+      padding: 0.75rem;
+      max-width: 720px;
+    }
+
+    figure.figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    figure.figure figcaption {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.4rem;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .figures-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 0.8rem;
+    }
+
+    figure.figure.small {
+      max-width: 360px;
+      flex: 1 1 0;
+    }
+
+    .repo-structure {
+      background: #050505;
+      border: 1px solid #ffffff;
+      padding: 0.8rem 1rem;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+      .overlay { padding-inline: 1rem; }
+      .article { padding: 1.2rem; }
+
+      .figures-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      figure.figure.small {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body data-i18n-scope="pages/audioclf">
+  <div id="ascii-background" aria-hidden="true">
+    <pre id="ascii-canvas"></pre>
+  </div>
+
+  <div class="overlay">
+    <div class="page-container">
+
+      <header class="site-header">
+        <div class="site-title" data-i18n="site.title"></div>
+        <p class="site-subtitle" data-i18n="site.subtitle"></p>
+
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="fr" id="btn-fr" aria-label="Français">FR</button>
+          <button class="lang-btn" data-lang="en" id="btn-en" aria-label="English">EN</button>
+        </div>
+      </header>
+
+      <a href="../index.html" class="back-link" data-i18n="article.audioclf.back"></a>
+
+      <article class="article">
+        <h1 class="article-title" data-i18n="article.audioclf.title"></h1>
+        <p class="article-subtitle" data-i18n="article.audioclf.subtitle"></p>
+
+        <!-- OVERVIEW -->
+        <section>
+          <h2 data-i18n="article.audioclf.overview.title"></h2>
+          <p data-i18n="article.audioclf.overview.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/audioclf/pipeline.png" alt="Pipeline fine-tuning audio transformer">
+            <figcaption data-i18n="article.audioclf.fig.pipeline.caption"></figcaption>
+          </figure>
+        </section>
+
+        <!-- DATA -->
+        <section>
+          <h2 data-i18n="article.audioclf.dataset.title"></h2>
+          <p data-i18n="article.audioclf.dataset.text"></p>
+
+          <div class="figures-row">
+            <figure class="figure small">
+              <img src="../assets/img/audioclf/class_distribution.png" alt="Distribution des classes">
+              <figcaption data-i18n="article.audioclf.fig.classdist.caption"></figcaption>
+            </figure>
+
+            <figure class="figure small">
+              <img src="../assets/img/audioclf/waveform_sample.png" alt="Waveform d'un extrait audio">
+              <figcaption data-i18n="article.audioclf.fig.waveform.caption"></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- PREPROCESSING -->
+        <section>
+          <h2 data-i18n="article.audioclf.preprocessing.title"></h2>
+          <p data-i18n="article.audioclf.preprocessing.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/audioclf/melspec_sample.png" alt="Représentation temps-fréquence d'un extrait">
+            <figcaption data-i18n="article.audioclf.fig.melspec.caption"></figcaption>
+          </figure>
+        </section>
+
+        <!-- MODEL -->
+        <section>
+          <h2 data-i18n="article.audioclf.model.title"></h2>
+          <p data-i18n="article.audioclf.model.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/audioclf/model_schema.png" alt="Schéma du modèle DistilHuBERT fine-tuné">
+            <figcaption data-i18n="article.audioclf.fig.architecture.caption"></figcaption>
+          </figure>
+        </section>
+
+        <!-- TRAINING -->
+        <section>
+          <h2 data-i18n="article.audioclf.training.title"></h2>
+          <p data-i18n="article.audioclf.training.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/audioclf/training_curves.png" alt="Courbes de loss et accuracy">
+            <figcaption data-i18n="article.audioclf.fig.loss.caption"></figcaption>
+          </figure>
+        </section>
+
+        <!-- EVALUATION -->
+        <section>
+          <h2 data-i18n="article.audioclf.inference.title"></h2>
+          <p data-i18n="article.audioclf.inference.text"></p>
+
+          <figure class="figure">
+            <img src="../assets/img/audioclf/confusion_matrix.png" alt="Matrice de confusion">
+            <figcaption data-i18n="article.audioclf.fig.confusion.caption"></figcaption>
+          </figure>
+        </section>
+
+        <!-- RESULTS -->
+        <section>
+          <h2 data-i18n="article.audioclf.results.title"></h2>
+          <p data-i18n="article.audioclf.results.text"></p>
+        </section>
+
+        <!-- CONCLUSION -->
+        <section>
+          <h2 data-i18n="article.audioclf.conclusion.title"></h2>
+          <p data-i18n="article.audioclf.conclusion.text"></p>
+        </section>
+
+        <!-- PROJECT STRUCTURE -->
+        <section>
+          <h2 data-i18n="article.audioclf.structure.title"></h2>
+          <div class="repo-structure">
+.
+├── transformer_fine_tune.ipynb
+├── README.md
+└── assets
+    └── img
+        └── audioclf
+            ├── pipeline.png
+            ├── class_distribution.png
+            ├── waveform_sample.png
+            ├── melspec_sample.png
+            ├── model_schema.png
+            ├── training_curves.png
+            └── confusion_matrix.png
+          </div>
+        </section>
+      </article>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/ascii-wave.js"></script>
+  <script src="../assets/js/lang.js"></script>
+</body>
+</html>
