@@ -19,4 +19,12 @@
   "card.nlp.tag.python": "Python",
   "card.nlp.tag.spacy": "spaCy",
   "card.nlp.tag.mlp": "MLP"
+
+
+  "card.audioae.title": "Audio Autoencoder on Mel Spectrograms",
+  "card.audioae.meta": "Deep learning · Audio · Representation",
+  "card.audioae.desc": "Convolutional autoencoder trained on log-mel spectrograms to learn a compact representation of audio signals and reconstruct the spectrogram.",
+  "card.audioae.tag.pytorch": "PyTorch",
+  "card.audioae.tag.torchaudio": "Torchaudio",
+  "card.audioae.tag.librosa": "Librosa"
 }
