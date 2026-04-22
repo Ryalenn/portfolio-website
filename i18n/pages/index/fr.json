@@ -6,12 +6,6 @@
   "card.audio.tag.keras": "Keras",
   "card.audio.tag.librosa": "Librosa",
 
-  "card.site.title": "Analyse de données de chantier",
-  "card.site.meta": "Computer vision · Sécurité",
-  "card.site.desc": "Détection de situations à risque sur des images de chantier, agrégation des incidents et visualisation via tableau de bord.",
-  "card.site.tag.pandas": "Pandas",
-  "card.site.tag.vision": "Vision",
-  "card.site.tag.powerbi": "Power BI",
 
   "card.nlp.title": "Toxic Comment Classification – NLP",
   "card.nlp.meta": "NLP · Multi-label",
@@ -19,4 +13,11 @@
   "card.nlp.tag.python": "Python",
   "card.nlp.tag.spacy": "spaCy",
   "card.nlp.tag.mlp": "MLP"
+
+  "card.audioae.title": "Autoencodeur audio sur mel-spectrogrammes",
+  "card.audioae.meta": "Deep learning · Audio · Représentation",
+  "card.audioae.desc": "Autoencodeur convolutionnel entraîné sur des log-mel spectrogrammes pour apprendre une représentation compacte du signal audio et reconstruire le spectrogramme.",
+  "card.audioae.tag.pytorch": "PyTorch",
+  "card.audioae.tag.torchaudio": "Torchaudio",
+  "card.audioae.tag.librosa": "Librosa"
 }
