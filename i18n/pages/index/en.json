@@ -18,7 +18,7 @@
   "card.nlp.desc": "Automatic toxicity detection in online comments using spaCy embeddings and a lightweight neural network.",
   "card.nlp.tag.python": "Python",
   "card.nlp.tag.spacy": "spaCy",
-  "card.nlp.tag.mlp": "MLP"
+  "card.nlp.tag.mlp": "MLP",
 
 
   "card.audioae.title": "Audio Autoencoder on Mel Spectrograms",
