@@ -27,7 +27,6 @@
       text-decoration: none;
     }
 
-    /* ASCII BACKGROUND  */
     #ascii-background {
       position: fixed;
       inset: 0;
@@ -51,7 +50,6 @@
       user-select: none;
     }
 
-    /*  CONTENT  */
     .overlay {
       position: relative;
       z-index: 1;
@@ -64,7 +62,6 @@
       margin: 0 auto;
     }
 
-    /*  HEADER */
     .site-header {
       position: relative;
       margin-bottom: 2rem;
@@ -85,7 +82,6 @@
       opacity: 1;
     }
 
-    /*  LANGUAGE SWITCH */
     .lang-switch {
       position: absolute;
       top: 0.75rem;
@@ -123,7 +119,6 @@
       transform: translateY(-1px);
     }
 
-    /* PROJECT CARDS  */
     .projects {
       margin-top: 2rem;
       display: flex;
@@ -196,7 +191,6 @@
       transform: translateY(1px);
     }
 
-    /*  MOBILE  */
     @media (max-width: 768px) {
       .overlay {
         padding-inline: 1rem;
@@ -218,15 +212,11 @@
   </style>
 </head>
 
-<!--  i18n  -->
 <body data-i18n-scope="pages/index">
-
-  <!-- ASCII -->
   <div id="ascii-background" aria-hidden="true">
     <pre id="ascii-canvas"></pre>
   </div>
 
-  <!-- Contenu -->
   <div class="overlay">
     <div class="page-container">
 
@@ -234,7 +224,6 @@
         <div class="site-title" data-i18n="site.title"></div>
         <p class="site-subtitle" data-i18n="site.subtitle"></p>
 
-        <!-- Sélecteur de langue -->
         <div class="lang-switch">
           <button class="lang-btn" data-lang="fr" id="btn-fr" aria-label="Français">FR</button>
           <button class="lang-btn" data-lang="en" id="btn-en" aria-label="English">EN</button>
@@ -242,7 +231,23 @@
       </header>
 
       <main class="projects">
-        <!-- Projet Autoencoder Audio -->
+        <a class="project-card"
+           href="pages/xtts-voice-cloner.html"
+           target="_blank" rel="noopener noreferrer">
+          <h2 class="project-title" data-i18n="card.xtts.title"></h2>
+          <div class="project-meta" data-i18n="card.xtts.meta"></div>
+          <p class="project-description" data-i18n="card.xtts.desc"></p>
+          <div class="project-tags">
+            <span class="tag" data-i18n="card.xtts.tag.python"></span>
+            <span class="tag" data-i18n="card.xtts.tag.xtts"></span>
+            <span class="tag" data-i18n="card.xtts.tag.streamlit"></span>
+          </div>
+          <div class="project-footer">
+            <span data-i18n="card.article"></span>
+            <span class="arrow">↗</span>
+          </div>
+        </a>
+
         <a class="project-card"
            href="pages/audio-autoencoder.html"
            target="_blank" rel="noopener noreferrer">
@@ -259,8 +264,7 @@
             <span class="arrow">↗</span>
           </div>
         </a>
-        
-        <!-- Projet Audio -->
+
         <a class="project-card"
            href="pages/instruments.html"
            target="_blank" rel="noopener noreferrer">
@@ -278,7 +282,6 @@
           </div>
         </a>
 
-        <!-- Projet NLP -->
         <a class="project-card"
            href="pages/nlp.html"
            target="_blank" rel="noopener noreferrer">
@@ -295,15 +298,12 @@
             <span class="arrow">↗</span>
           </div>
         </a>
-
       </main>
 
     </div>
   </div>
 
-  <!-- scripts dans assets/js -->
   <script src="assets/js/ascii-wave.js"></script>
   <script src="assets/js/lang.js"></script>
 </body>
 </html>
-
