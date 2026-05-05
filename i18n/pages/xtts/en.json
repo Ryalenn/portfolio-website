@@ -1,0 +1,33 @@
+{
+  "article.xtts.back": "← Back",
+
+  "article.xtts.title": "Voice Cloner with XTTS v2",
+  "article.xtts.subtitle": "Zero-shot voice cloning app: upload or record audio samples, generate speech from text, and compare multiple outputs.",
+
+  "article.xtts.overview.title": "1. Overview",
+  "article.xtts.overview.text": "This project explores the use of XTTS v2 to generate synthetic speech from a short voice sample. The goal is to build a simple application: the user uploads or records a few audio clips, writes a sentence, selects a language, and gets three downloadable outputs.\n\nThe focus is on preserving the voice timbre (the overall tone and texture of the voice), rather than expressive acting or emotional variation.",
+
+  "article.xtts.goal.title": "2. Project goal",
+  "article.xtts.goal.text": "The main objective is to integrate a modern text-to-speech model into a simple local interface. The user does not need to train a model or write code: they just provide a few voice samples and a text.\n\nThis makes it possible to quickly experiment with zero-shot voice cloning while keeping the experience lightweight and accessible.",
+
+  "article.xtts.pipeline.title": "3. How it works",
+  "article.xtts.pipeline.text": "The application feeds multiple voice samples, a text input, and a target language into XTTS v2. The model then generates a new audio output that resembles the provided voice.\n\nTo avoid relying on a single generation, three slightly different versions are produced. The user can listen and choose the most convincing one.",
+
+  "article.xtts.preprocessing.title": "4. Audio preprocessing",
+  "article.xtts.preprocessing.text": "Before generation, each reference audio is processed automatically. The signal is converted to mono, resampled to 24 kHz, normalized in volume, and trimmed to remove silence at the beginning and end.\n\nThis step helps provide cleaner and more consistent inputs to the model, which generally improves output stability.",
+
+  "article.xtts.app.title": "5. Streamlit application",
+  "article.xtts.app.text": "The interface is built with Streamlit to keep it simple and easy to run locally. Users can upload audio files or record samples directly from their microphone.\n\nThe number of reference samples is limited to ten to keep the interface clean. Uploaded audio can be previewed before generation to quickly check its quality.",
+
+  "article.xtts.variants.title": "6. Output variations",
+  "article.xtts.variants.text": "Speech generation can vary depending on inference parameters, so the app produces three versions of the same sentence.\n\nThe first version favors stability, the second aims for a balance between naturalness and fidelity, and the third allows slightly more variation. This makes it easier to pick the most convincing result.",
+
+  "article.xtts.limits.title": "7. Limitations",
+  "article.xtts.limits.text": "XTTS v2 can produce convincing zero-shot results, but it does not perfectly replicate a voice. It can capture aspects of timbre, pitch, and texture, but may lose finer details such as accent, pronunciation habits, or subtle intonation.\n\nPronunciation also depends heavily on the input text and chosen language. Proper nouns, acronyms, numbers, or foreign words may require more phonetic spelling to sound natural.",
+
+  "article.xtts.conclusion.title": "8. Conclusion and next steps",
+  "article.xtts.conclusion.text": "This project demonstrates how to integrate a modern TTS model into a small local application. The result is a simple tool to experiment with voice cloning from a few samples, compare multiple generations, and download the outputs.\n\nPossible improvements include automatic splitting of long sentences, better text normalization, and exploring audio-to-audio models. These models are heavier to run and require more resources, but can provide more accurate voice reproduction in some cases.",
+
+  "article.xtts.fig.pipeline.caption": "Pipeline: audio samples → preprocessing → XTTS v2 → three generated outputs",
+  "article.xtts.fig.app.caption": "Streamlit interface: upload or record samples, input text, select language, and generate audio"
+}
