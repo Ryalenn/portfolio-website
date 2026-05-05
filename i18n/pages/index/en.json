@@ -25,7 +25,6 @@
   "card.xtts.title": "Voice Cloner with XTTS v2",
   "card.xtts.meta": "Text-to-speech · Audio · Application",
   "card.xtts.desc": "Streamlit app to upload or record voice samples, then generate a new sentence with a similar voice timbre.",
-  "card.xtts.tag.python": "Python",
-  "card.xtts.tag.xtts": "XTTS v2",
+  "card.xtts.tag.python": "Librosa",
   "card.xtts.tag.streamlit": "Streamlit"
 }
