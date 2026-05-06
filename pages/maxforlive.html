@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Max for Live Devices – Live Performance Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #050505;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    #ascii-background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: #000;
+      pointer-events: none;
+      opacity: 0.25;
+    }
+
+    #ascii-canvas {
+      position: absolute;
+      inset: 0;
+      white-space: pre;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 10px;
+      line-height: 1;
+      color: #1f2933;
+      user-select: none;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: relative;
+      margin-bottom: 2rem;
+      padding: 1rem 1.25rem;
+      background: #000;
+      border: 1px solid #ffffff;
+    }
+
+    .site-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .site-subtitle {
+      font-size: 0.9rem;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.9rem;
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .lang-btn {
+      min-width: 32px;
+      height: 22px;
+      border: 1px solid #fff;
+      background: #000;
+      color: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      padding: 0 6px;
+      opacity: 0.4;
+      transition: opacity 0.15s ease-out, transform 0.1s ease-out;
+    }
+
+    .lang-btn.active {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      text-decoration: underline;
+    }
+
+    .article {
+      background: #000;
+      border: 1px solid #ffffff;
+      padding: 1.6rem;
+    }
+
+    .article-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .article-subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1.4rem;
+    }
+
+    .article section { margin-bottom: 2rem; }
+
+    .article h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .article h3 {
+      font-size: 1.05rem;
+      margin: 0.9rem 0 0.4rem;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    .article p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+      white-space: pre-line;
+    }
+
+    .article ul {
+      margin-left: 1.1rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .patch-card {
+      border: 1px solid #ffffff;
+      padding: 1rem;
+      margin-top: 1rem;
+      background: #050505;
+    }
+
+    .patch-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.7rem 0 1rem;
+    }
+
+    .tag {
+      border: 1px solid #ffffff;
+      padding: 0.18rem 0.45rem;
+      font-size: 0.74rem;
+      opacity: 0.9;
+    }
+
+    figure.figure {
+      margin: 1rem auto 0.4rem;
+      border: 1px solid #ffffff;
+      background: #000;
+      padding: 0.75rem;
+      max-width: 820px;
+    }
+
+    figure.figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    figure.figure figcaption {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 0.4rem;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .repo-structure {
+      background: #050505;
+      border: 1px solid #ffffff;
+      padding: 0.8rem 1rem;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+      .overlay { padding-inline: 1rem; }
+      .article { padding: 1.2rem; }
+    }
+  </style>
+</head>
+
+<body data-i18n-scope="pages/maxforlive">
+  <div id="ascii-background" aria-hidden="true">
+    <pre id="ascii-canvas"></pre>
+  </div>
+
+  <div class="overlay">
+    <div class="page-container">
+
+      <header class="site-header">
+        <div class="site-title" data-i18n="site.title"></div>
+        <p class="site-subtitle" data-i18n="site.subtitle"></p>
+
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="fr" id="btn-fr" aria-label="Français">FR</button>
+          <button class="lang-btn" data-lang="en" id="btn-en" aria-label="English">EN</button>
+        </div>
+      </header>
+
+      <a href="../index.html" class="back-link" data-i18n="article.maxforlive.back"></a>
+
+      <article class="article">
+        <h1 class="article-title" data-i18n="article.maxforlive.title"></h1>
+        <p class="article-subtitle" data-i18n="article.maxforlive.subtitle"></p>
+
+        <section>
+          <h2 data-i18n="article.maxforlive.context.title"></h2>
+          <p data-i18n="article.maxforlive.context.text"></p>
+        </section>
+
+        <section>
+          <h2 data-i18n="article.maxforlive.goal.title"></h2>
+          <p data-i18n="article.maxforlive.goal.text"></p>
+        </section>
+
+        <section>
+          <h2 data-i18n="article.maxforlive.devices.title"></h2>
+
+          <div class="patch-card">
+            <h3 data-i18n="article.maxforlive.quantized.title"></h3>
+            <div class="patch-meta">
+              <span class="tag" data-i18n="article.maxforlive.tag.maxforlive"></span>
+              <span class="tag" data-i18n="article.maxforlive.tag.ableton"></span>
+              <span class="tag" data-i18n="article.maxforlive.tag.performance"></span>
+              <span class="tag" data-i18n="article.maxforlive.tag.liveapi"></span>
+            </div>
+            <p data-i18n="article.maxforlive.quantized.text"></p>
+
+            <figure class="figure">
+              <img src="../assets/img/maxforlive/quantize_toggle.png" alt="Quantized FX Toggle Max for Live device">
+              <figcaption data-i18n="article.maxforlive.fig.quantized.caption"></figcaption>
+            </figure>
+          </div>
+
+          <div class="patch-card">
+            <h3 data-i18n="article.maxforlive.momentum.title"></h3>
+            <div class="patch-meta">
+              <span class="tag" data-i18n="article.maxforlive.tag.maxforlive"></span>
+              <span class="tag" data-i18n="article.maxforlive.tag.midi"></span>
+              <span class="tag" data-i18n="article.maxforlive.tag.controller"></span>
+              <span class="tag" data-i18n="article.maxforlive.tag.workflow"></span>
+            </div>
+            <p data-i18n="article.maxforlive.momentum.text"></p>
+
+            <figure class="figure">
+              <img src="../assets/img/maxforlive/cc_to_momentum.png" alt="CC to Momentum Max for Live device">
+              <figcaption data-i18n="article.maxforlive.fig.momentum.caption"></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section>
+          <h2 data-i18n="article.maxforlive.technical.title"></h2>
+          <p data-i18n="article.maxforlive.technical.text"></p>
+        </section>
+
+        <section>
+          <h2 data-i18n="article.maxforlive.ux.title"></h2>
+          <p data-i18n="article.maxforlive.ux.text"></p>
+        </section>
+
+        <section>
+          <h2 data-i18n="article.maxforlive.conclusion.title"></h2>
+          <p data-i18n="article.maxforlive.conclusion.text"></p>
+        </section>
+
+        <section>
+          <h2>Project structure</h2>
+          <div class="repo-structure">
+.
+├── maxforlive.html
+├── /assets
+│   └── img
+│       └── maxforlive
+│           ├── quantize_toggle.png
+│           └── cc_to_momentum.png
+└── /patches
+    └── maxforlive
+        ├── quantize_toggle.amxd
+        └── cc_to_momentum.amxd
+          </div>
+        </section>
+      </article>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/ascii-wave.js"></script>
+  <script src="../assets/js/lang.js"></script>
+</body>
+</html>
