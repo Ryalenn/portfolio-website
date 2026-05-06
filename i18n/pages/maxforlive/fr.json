@@ -1,0 +1,40 @@
+{
+  "article.maxforlive.back": "← Retour",
+
+  "article.maxforlive.title": "Devices Max for Live pour performance live",
+  "article.maxforlive.subtitle": "Une série de petits outils Max for Live conçus pour rendre un setup Ableton Live plus jouable, plus stable et plus rapide à contrôler en performance.",
+
+  "article.maxforlive.context.title": "1. Contexte",
+  "article.maxforlive.context.text": "Je développe ces devices dans le cadre de mon setup live sur Ableton Live, où j’utilise plusieurs contrôleurs MIDI, des racks d’effets, des plugins externes et beaucoup de mappings différents. Dans ce contexte, certains gestes simples deviennent vite difficiles à fiabiliser : activer un effet exactement sur le temps, transformer un bouton toggle en comportement momentané, ou contrôler un paramètre précis sans casser le flux de performance.",
+
+  "article.maxforlive.goal.title": "2. Objectif",
+  "article.maxforlive.goal.text": "L’objectif de cette page est de regrouper mes patches Max for Live orientés performance. Chaque device répond à un problème concret rencontré en live : réduire les erreurs de timing, éviter les clics audio, simplifier le mapping MIDI ou rendre un setup avec plusieurs contrôleurs plus lisible et plus robuste.",
+
+  "article.maxforlive.devices.title": "3. Devices",
+
+  "article.maxforlive.quantized.title": "Quantized FX Toggle",
+  "article.maxforlive.quantized.text": "Ce device permet de basculer entre une chaîne DRY et une chaîne WET d’un Audio Effect Rack de manière quantifiée sur la mesure suivante. Il a été conçu pour éviter les activations ou désactivations d’effets légèrement en avance ou en retard pendant un live.\n\nLe patch observe la position de lecture d’Ableton Live, détecte les changements de mesure, puis planifie l’action avec un offset réglable en millisecondes. Le changement de volume entre les chaînes DRY et WET passe par un court fondu afin d’éviter les clics et les coupures brutales de transitoires, notamment sur les kicks.\n\nLe device contrôle les paramètres ciblés via la Live API, à partir de chemins live.path renseignés dans le patch. Il est pensé pour des racks d’effets globaux sur le master ou sur une piste principale, par exemple des reverbs, delays, phasers ou chaînes de traitement externes.",
+
+  "article.maxforlive.momentum.title": "CC to Momentum",
+  "article.maxforlive.momentum.text": "Ce device transforme un bouton MIDI en contrôle momentané fiable. Il répond à un problème fréquent avec certains contrôleurs : même lorsqu’un bouton est censé être momentary, Ableton ou le mapping MIDI peut le traiter comme un toggle.\n\nLe patch lit directement les messages MIDI bruts avec notein, apprend la note à utiliser grâce à un bouton Learn, puis filtre les événements entrants pour ne réagir qu’au bouton sélectionné. La velocity permet ensuite de distinguer l’appui et le relâchement : velocity > 0 déclenche l’état ON, velocity = 0 déclenche l’état OFF.\n\nCe fonctionnement permet de contrôler un paramètre Live comme un effet momentané, sans dépendre du comportement parfois ambigu du MIDI Map Mode d’Ableton. C’est particulièrement utile dans un setup avec plusieurs contrôleurs pouvant envoyer les mêmes notes ou CC.",
+
+  "article.maxforlive.technical.title": "4. Choix techniques",
+  "article.maxforlive.technical.text": "Les devices utilisent des objets Max for Live comme live.path, live.object, live.remote~, live.observer et notein. Le premier patch privilégie la synchronisation avec la position réelle de Live plutôt qu’un simple metro, afin d’éviter les problèmes de phase lors des pauses, relances ou rechargements du device. Le second patch contourne les limites du MIDI mapping classique en lisant les notes MIDI directement dans Max et en filtrant la note apprise.",
+
+  "article.maxforlive.ux.title": "5. Interface et ergonomie",
+  "article.maxforlive.ux.text": "Au-delà du fonctionnement technique, l’objectif est aussi de rendre ces patches présentables et utilisables rapidement dans un vrai set. Les interfaces sont pensées pour le mode Presentation de Max for Live : les contrôles importants restent visibles, tandis que le câblage interne est masqué. Les prochaines améliorations prévues incluent des champs éditables pour les chemins Live API, des boutons Learn plus explicites, un affichage de la note actuellement apprise et un statut visuel de l’état actif.",
+
+  "article.maxforlive.conclusion.title": "6. Conclusion et suites",
+  "article.maxforlive.conclusion.text": "Ces patches sont des outils utilitaires, mais ils illustrent une approche importante de mon travail live : transformer des problèmes très concrets de performance en systèmes simples, réutilisables et robustes. Ils me permettent de mieux contrôler mon setup, de réduire les erreurs en situation de live et de rendre mes interactions avec Ableton plus musicales.\n\nCette page est destinée à évoluer au fur et à mesure que j’ajouterai de nouveaux devices Max for Live, notamment autour du mapping MIDI, du contrôle d’effets, de la synchronisation tempo et de l’interaction entre Ableton Live, TouchDesigner et des contrôleurs physiques.",
+
+  "article.maxforlive.fig.quantized.caption": "Quantized FX Toggle : bascule quantifiée entre chaînes DRY et WET avec offset et fondu court.",
+  "article.maxforlive.fig.momentum.caption": "CC to Momentum : apprentissage d’une note MIDI et conversion en contrôle momentané fiable.",
+
+  "article.maxforlive.tag.maxforlive": "Max for Live",
+  "article.maxforlive.tag.ableton": "Ableton Live",
+  "article.maxforlive.tag.performance": "Live performance",
+  "article.maxforlive.tag.liveapi": "Live API",
+  "article.maxforlive.tag.midi": "MIDI",
+  "article.maxforlive.tag.controller": "Contrôleurs",
+  "article.maxforlive.tag.workflow": "Workflow"
+}
