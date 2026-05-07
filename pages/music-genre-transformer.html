@@ -56,7 +56,6 @@
       padding: 1rem 1.25rem;
       background: #000;
       border: 1px solid #ffffff;
-      border-radius: 0;
     }
 
     .site-title {
@@ -108,7 +107,6 @@
     .article {
       background: #000;
       border: 1px solid #ffffff;
-      border-radius: 0;
       padding: 1.6rem;
     }
 
@@ -160,6 +158,10 @@
       max-width: 720px;
     }
 
+    figure.figure.full {
+      max-width: 100%;
+    }
+
     figure.figure img {
       width: 100%;
       height: auto;
@@ -174,17 +176,10 @@
       line-height: 1.35;
     }
 
-    .figures-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      align-items: flex-start;
-      margin-top: 0.8rem;
-    }
-
-    figure.figure.small {
-      max-width: 360px;
-      flex: 1 1 0;
+    .audio-player {
+      width: 100%;
+      margin-top: 0.75rem;
+      filter: invert(1);
     }
 
     .repo-structure {
@@ -201,13 +196,9 @@
       .overlay { padding-inline: 1rem; }
       .article { padding: 1.2rem; }
 
-      .figures-row {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      figure.figure.small {
-        max-width: 100%;
+      .lang-switch {
+        position: static;
+        margin-top: 0.75rem;
       }
     }
   </style>
@@ -252,18 +243,21 @@
         <section>
           <h2 data-i18n="article.audioclf.dataset.title"></h2>
           <p data-i18n="article.audioclf.dataset.text"></p>
-          
-          <div class="figures-row">
-            <figure class="figure small">
-              <img src="../assets/img/audioclf/class_distribution.png" alt="Distribution des classes">
-              <figcaption data-i18n="article.audioclf.fig.classdist.caption"></figcaption>
-            </figure>
 
-            <figure class="figure small">
-              <img src="../assets/img/audioclf/waveform_sample.png" alt="Waveform d'un extrait audio">
-              <figcaption data-i18n="article.audioclf.fig.waveform.caption"></figcaption>
-            </figure>
-          </div>
+          <figure class="figure full">
+            <img src="../assets/img/audioclf/class_distribution.png" alt="Distribution des classes">
+            <figcaption data-i18n="article.audioclf.fig.classdist.caption"></figcaption>
+          </figure>
+
+          <figure class="figure full">
+            <img src="../assets/img/audioclf/waveform_sample.png" alt="Waveform d'un extrait audio">
+            <figcaption data-i18n="article.audioclf.fig.waveform.caption"></figcaption>
+
+            <audio class="audio-player" controls>
+              <source src="../assets/audio/audioclf/sample_audio.wav" type="audio/wav">
+              Your browser does not support the audio element.
+            </audio>
+          </figure>
         </section>
 
         <!-- PREPROCESSING -->
@@ -330,6 +324,9 @@
 ├── transformer_fine_tune.ipynb
 ├── README.md
 └── assets
+    ├── audio
+    │   └── audioclf
+    │       └── sample_audio.wav
     └── img
         └── audioclf
             ├── pipeline.png
