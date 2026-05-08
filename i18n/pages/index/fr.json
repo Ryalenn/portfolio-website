@@ -26,5 +26,12 @@
   "card.xtts.meta": "Text-to-speech · Audio · Application",
   "card.xtts.desc": "Application Streamlit permettant d’importer ou d’enregistrer des références vocales, puis de générer une nouvelle phrase avec un timbre proche.",
   "card.xtts.tag.python": "Librosa",
-  "card.xtts.tag.streamlit": "Streamlit"
+  "card.xtts.tag.streamlit": "Streamlit",
+
+  "card.maxforlive.title": "Devices Max for Live",
+  "card.maxforlive.meta": "Ableton Live · MIDI · Performance",
+  "card.maxforlive.desc": "Collection de patches Max for Live conçus pour améliorer le contrôle en live : quantization d’effets, transformation de contrôles MIDI et outils personnalisés pour un setup multi-contrôleurs.",
+  "card.maxforlive.tag.m4l": "Max for Live",
+  "card.maxforlive.tag.ableton": "Ableton",
+  "card.maxforlive.tag.midi": "MIDI"
 }
