@@ -26,5 +26,12 @@
   "card.xtts.meta": "Text-to-speech · Audio · Application",
   "card.xtts.desc": "Streamlit app to upload or record voice samples, then generate a new sentence with a similar voice timbre.",
   "card.xtts.tag.python": "Librosa",
-  "card.xtts.tag.streamlit": "Streamlit"
+  "card.xtts.tag.streamlit": "Streamlit",
+
+  "card.maxforlive.title": "Max for Live Devices",
+  "card.maxforlive.meta": "Ableton Live · MIDI · Performance",
+  "card.maxforlive.desc": "Collection of Max for Live patches designed to improve live control: effect quantization, MIDI behavior shaping, and custom tools for multi-controller setups.",
+  "card.maxforlive.tag.m4l": "Max for Live",
+  "card.maxforlive.tag.ableton": "Ableton",
+  "card.maxforlive.tag.midi": "MIDI"
 }
