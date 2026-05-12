@@ -33,5 +33,12 @@
   "card.maxforlive.desc": "Collection de patches Max for Live conçus pour améliorer le contrôle en live : quantization d’effets, transformation de contrôles MIDI et outils personnalisés pour un setup multi-contrôleurs.",
   "card.maxforlive.tag.m4l": "Max for Live",
   "card.maxforlive.tag.ableton": "Ableton",
-  "card.maxforlive.tag.midi": "MIDI"
+  "card.maxforlive.tag.midi": "MIDI",
+
+  "card.audioclf.title": "Classification de genres musicaux avec DistilHuBERT",
+  "card.audioclf.meta": "Deep Learning Audio · Transformers · GTZAN",
+  "card.audioclf.desc": "Fine-tuning d’un transformer audio préentraîné pour classifier automatiquement des extraits musicaux en 10 genres.",
+  "card.audioclf.tag.pytorch": "PyTorch",
+  "card.audioclf.tag.transformers": "Transformers",
+  "card.audioclf.tag.datasets": "Datasets"
 }
