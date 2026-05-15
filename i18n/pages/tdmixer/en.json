@@ -1,0 +1,45 @@
+{
+  "article.tdmixer.back": "← Back",
+
+  "article.tdmixer.title": "TD Mixer: modular live visual performance system with TouchDesigner",
+  "article.tdmixer.subtitle": "Development of a real-time VJing tool designed to dynamically load, mix and control visual scenes during a live performance, using a custom interface, a MIDI controller and a Python backend.",
+
+  "article.tdmixer.overview.title": "Overview",
+  "article.tdmixer.overview.text": "TD Mixer is a visual performance tool developed with TouchDesigner. Its goal is to allow an artist to navigate between multiple visual scenes, load them live, mix them like two audio tracks, and project them during a concert, a party or an installation.\n\nFor someone unfamiliar with VJing, it can be seen as real-time video mixing software: instead of preparing a fixed video in advance, the user manipulates generative visuals live, reacting to the music and to the atmosphere of the moment.",
+
+  "article.tdmixer.context.title": "Context and need",
+  "article.tdmixer.context.text": "In a live performance, the constraints are very different from a classic video render. The system must remain smooth, responsive and stable throughout the whole set. The user needs to quickly switch between visual worlds, control parameters in real time and keep a clear view of what is being sent to the projector.\n\nThe project addresses this need by separating the visual content, the control interface and the execution engine. Visual scenes are stored as modular files, while the main project acts as a host able to load, control and mix them.",
+
+  "article.tdmixer.architecture.title": "General architecture",
+  "article.tdmixer.architecture.text": "The system is based on a modular architecture. The main project contains the interface, the mixing engine, MIDI management, monitoring and the Python logic. Visual scenes are placed in a TOX folder as independent modules.\n\nThis separation avoids having an overly centralized project that would be difficult to maintain. Each scene can be developed separately, then added to the system simply by dropping its file into the dedicated folder. The main project then detects these modules and makes them available through the navigation interface.",
+
+  "article.tdmixer.tox.title": "Plug-and-play visual modules",
+  "article.tdmixer.tox.text": "In TouchDesigner, a .tox file can contain a complete visual scene: generators, effects, shaders, control parameters and video outputs. In this project, each .tox is treated as an autonomous module.\n\nThe user can prepare several scenes in advance, place them in the TOX folder, then automatically find them in the integrated browser. This logic turns the project into an extensible platform because adding new visual content does not require modifying the core of the system.",
+
+  "article.tdmixer.midi.title": "MIDI control and virtual interface",
+  "article.tdmixer.midi.text": "The tool is designed to be used with a physical MIDI controller, especially an AKAI MIDImix. It can of course work with other controllers, but it was first designed around this use case. The buttons are used to navigate through the scene library and to load a module onto track A or track B.\n\nThe remaining faders, knobs and buttons are not fixed in advance: each scene can define its own parameters. The interface displays a virtual representation of the controller for each track, with parameter names and real-time values. This gives the user a clear visual reference during performance, even if each scene uses the controls differently.",
+
+  "article.tdmixer.realtime.title": "A/B mixing and live projection",
+  "article.tdmixer.realtime.text": "The system works with an A/B logic similar to a mixing console: two scenes can be loaded in parallel. A crossfader then allows the user to progressively blend the two outputs or switch from one to the other.\n\nThe interface separates the previews of the two tracks from the final projected output. This separation is important in a live context because the artist can prepare the next scene without immediately sending it to the audience, then trigger the transition at the right moment.",
+
+  "article.tdmixer.audio.title": "Audio-reactivity and monitoring",
+  "article.tdmixer.audio.text": "The project also supports audio-reactive visuals. The audio signal can be analyzed to extract useful information, for example detecting the impact of a kick or following the volume of specific frequency ranges. These data can then be used by the scenes to trigger animations or modulate effects.\n\nThe interface also includes adjustable thresholds to adapt sensitivity during a live set. If the input volume changes, the user can correct the threshold directly while performing. The system also displays performance information such as FPS, GPU usage and CPU latency, in order to monitor rendering stability in real time.",
+
+  "article.tdmixer.python.title": "Role of Python",
+  "article.tdmixer.python.text": "Python acts as the backend layer of the project. TouchDesigner is used for visual rendering and real-time processing, while Python orchestrates the dynamic behavior of the system.\n\nIt is used in particular to automatically scan the module folder, load and unload .tox files on demand, update the interface, synchronize control values, manage the state of tracks A/B and limit memory usage. This logic makes it possible to load only the scenes that are needed when they are actually used, instead of keeping all scenes active at all times.\n\nThis choice improves system stability and makes the project scalable, because adding a new scene does not require modifying the main code, only respecting the structure expected by the mixer.",
+
+  "article.tdmixer.skills.title": "Skills involved",
+  "article.tdmixer.skills.text": "This project combines creative and technical skills: real-time interface design, modular architecture, MIDI event management, Python programming, GPU/CPU resource optimization, audio-reactivity and the development of a workflow usable in live performance conditions.",
+
+  "article.tdmixer.conclusion.title": "Conclusion and next steps",
+  "article.tdmixer.conclusion.text": "TD Mixer allowed me to turn a set of TouchDesigner scenes into a live performance platform. The project is not limited to producing visuals: it provides a structure to organize, load, control and mix them in real time. I still use it today, and it is meant to evolve according to my future needs and my growing knowledge of TouchDesigner.\n\nThe next steps are to clean up the project for a GitHub release, document how to create compatible modules, add example scenes and make the system easier to reuse by other artists or developers.",
+
+  "article.tdmixer.structure.title": "Project structure",
+
+  "article.tdmixer.fig.interface.caption": "Main interface: previews, final output, scene browser, virtual MIDI controls and real-time monitoring.",
+  "article.tdmixer.fig.architecture.caption": "Internal architecture of the TouchDesigner project: separation between module management, interface, preview, projector output and MIDI control.",
+  "article.tdmixer.fig.browser.caption": "Scene browser: available .tox files are displayed as a visual library that can be selected live.",
+  "article.tdmixer.fig.midi.caption": "Virtual representation of the MIDI controller: parameters exposed by each scene are displayed with their real-time values.",
+  "article.tdmixer.fig.ab.caption": "A/B mixing principle: two scenes are loaded simultaneously and blended using a crossfader.",
+  "article.tdmixer.fig.audio.caption": "Audio and performance monitoring: waveform, adjustable thresholds, FPS, GPU memory and latency."
+}
