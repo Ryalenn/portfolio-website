@@ -4,28 +4,28 @@
   "article.xtts.title": "Voice Cloner avec XTTS v2",
   "article.xtts.subtitle": "Application de clonage vocal zero-shot : import ou enregistrement de références audio, génération de texte en voix synthétique et comparaison de plusieurs variantes.",
 
-  "article.xtts.overview.title": "1. Vue d'ensemble",
+  "article.xtts.overview.title": "Vue d'ensemble",
   "article.xtts.overview.text": "Ce projet explore l’utilisation de XTTS v2 pour générer une voix synthétique à partir d’un court échantillon vocal. L’objectif est de créer une application simple : l’utilisateur importe ou enregistre quelques audios, écrit le texte à générer, choisit la langue, puis obtient trois versions téléchargeables.\n\nLe projet se concentre surtout sur la restitution du timbre vocal, c’est-à-dire la couleur générale de la voix, plutôt que sur le changement d’émotion ou le jeu d’acteur.",
 
-  "article.xtts.goal.title": "2. Objectif du projet",
+  "article.xtts.goal.title": "Objectif du projet",
   "article.xtts.goal.text": "Le but principal est d’intégrer un modèle de synthèse vocale moderne dans une interface locale facile à utiliser. L’utilisateur n’a pas besoin d’entraîner un modèle ni de manipuler du code : il fournit simplement quelques références vocales et un texte.\n\nCette approche permet de tester rapidement les possibilités du clonage vocal zero-shot, tout en gardant une expérience légère et accessible.",
 
-  "article.xtts.pipeline.title": "3. Fonctionnement général",
+  "article.xtts.pipeline.title": "Fonctionnement général",
   "article.xtts.pipeline.text": "L’application transmet à XTTS v2 plusieurs références vocales, un texte et une langue de génération. Le modèle utilise ces éléments pour produire un nouvel audio avec une voix proche des exemples fournis.\n\nPour éviter de dépendre d’une seule sortie, trois variantes sont générées avec des réglages légèrement différents. L’utilisateur peut ensuite écouter les résultats et télécharger la version qui lui semble la plus fidèle.",
 
-  "article.xtts.preprocessing.title": "4. Prétraitement audio",
+  "article.xtts.preprocessing.title": "Prétraitement audio",
   "article.xtts.preprocessing.text": "Avant la génération, chaque audio de référence est préparé automatiquement. Le signal est converti en mono, resamplé à 24 kHz, normalisé en volume et débarrassé des silences inutiles en début et fin de fichier.\n\nCette étape permet de fournir au modèle des échantillons plus propres et plus homogènes, ce qui améliore généralement la stabilité du résultat.",
 
-  "article.xtts.app.title": "5. Application Streamlit",
+  "article.xtts.app.title": "Application Streamlit",
   "article.xtts.app.text": "L’interface est développée avec Streamlit pour rester simple à lancer localement. L’utilisateur peut importer des fichiers audio ou enregistrer directement des samples depuis son micro.\n\nL’application limite le nombre de références à dix échantillons afin de garder une expérience claire. Les audios ajoutés peuvent être prévisualisés avant la génération pour vérifier rapidement leur qualité.",
 
-  "article.xtts.variants.title": "6. Génération de variantes",
+  "article.xtts.variants.title": "Génération de variantes",
   "article.xtts.variants.text": "Une génération vocale peut varier selon les paramètres d’inférence. L’application produit donc trois versions du même texte.\n\nLa première version privilégie la stabilité, la deuxième cherche un équilibre entre naturel et fidélité, et la troisième laisse un peu plus de liberté au modèle. Cette comparaison permet de choisir le rendu le plus convaincant selon la voix et la phrase générée.",
 
-  "article.xtts.limits.title": "7. Limites",
+  "article.xtts.limits.title": "Limites",
   "article.xtts.limits.text": "XTTS v2 peut produire des résultats convaincants en zero-shot, mais il ne reproduit pas parfaitement une voix. Le modèle peut conserver une partie du timbre, de la hauteur et de la texture vocale, mais il peut perdre certains éléments plus fins comme l’accent, les habitudes de prononciation ou certaines intonations très personnelles.\n\nLa prononciation dépend aussi fortement du texte fourni et de la langue choisie. Les noms propres, acronymes, chiffres ou mots étrangers peuvent nécessiter une écriture plus phonétique pour obtenir un rendu plus naturel.",
 
-  "article.xtts.conclusion.title": "8. Conclusion et suites",
+  "article.xtts.conclusion.title": "Conclusion et suites",
   "article.xtts.conclusion.text": "Ce projet montre comment intégrer un modèle TTS moderne dans une petite application utilisable localement. Le résultat est un outil simple pour tester le clonage vocal à partir de quelques échantillons, comparer plusieurs générations et télécharger les audios produits.\n\nLes améliorations possibles concernent principalement le découpage automatique des phrases longues, la normalisation intelligente du texte, et l’exploration d’un modèle audio-to-audio, plus lourd à générer et plus coûteux en ressources, mais potentiellement plus fidèle pour certains usages.",
 
   "article.xtts.fig.pipeline.caption": "Pipeline : références audio → prétraitement → XTTS v2 → trois variantes générées",
