@@ -44,9 +44,8 @@
 
 
   "card.tdmixer.title": "TD Mixer : Système de VJing modulaire",
-  "card.tdmixer.meta": "TouchDesigner · Temps réel · Python",
+  "card.tdmixer.meta": "Application · Temps réel · Performance",
   "card.tdmixer.desc": "Plateforme de performance visuelle développée avec TouchDesigner permettant de charger, mixer et contrôler dynamiquement des scènes visuelles en live avec une architecture modulaire et un backend Python.",
   "card.tdmixer.tag.touchdesigner": "TouchDesigner",
-  "card.tdmixer.tag.python": "Python",
-  "card.tdmixer.tag.realtime": "Realtime"
+  "card.tdmixer.tag.python": "Python"
 }
