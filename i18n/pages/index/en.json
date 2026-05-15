@@ -47,5 +47,5 @@
   "card.tdmixer.meta": "Application · Real-time · Performance",
   "card.tdmixer.desc": "Visual performance platform built with TouchDesigner to dynamically load, mix and control visual scenes live using a modular architecture and a Python backend.",
   "card.tdmixer.tag.touchdesigner": "TouchDesigner",
-  "card.tdmixer.tag.python": "Python",
+  "card.tdmixer.tag.python": "Python"
 }
