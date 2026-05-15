@@ -8,7 +8,7 @@
   "card.audio.tag.keras": "Keras",
   "card.audio.tag.librosa": "Librosa",
 
-  "card.nlp.title": "Toxic Comment Classification – NLP",
+  "card.nlp.title": "Toxic Comment Classification",
   "card.nlp.meta": "NLP · Multi-label",
   "card.nlp.desc": "Détection automatique de toxicité dans des commentaires en ligne à l’aide d’embeddings spaCy et d’un réseau de neurones léger.",
   "card.nlp.tag.python": "Python",
@@ -43,7 +43,7 @@
   "card.audioclf.tag.datasets": "Datasets",
 
 
-  "card.tdmixer.title": "TD Mixer – Système de VJing modulaire",
+  "card.tdmixer.title": "TD Mixer : Système de VJing modulaire",
   "card.tdmixer.meta": "TouchDesigner · Temps réel · Python",
   "card.tdmixer.desc": "Plateforme de performance visuelle développée avec TouchDesigner permettant de charger, mixer et contrôler dynamiquement des scènes visuelles en live avec une architecture modulaire et un backend Python.",
   "card.tdmixer.tag.touchdesigner": "TouchDesigner",
