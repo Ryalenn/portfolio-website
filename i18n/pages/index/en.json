@@ -40,5 +40,13 @@
   "card.audioclf.desc": "Fine-tuning a pretrained audio transformer to classify music excerpts into 10 genres.",
   "card.audioclf.tag.pytorch": "PyTorch",
   "card.audioclf.tag.transformers": "Transformers",
-  "card.audioclf.tag.datasets": "Datasets"
+  "card.audioclf.tag.datasets": "Datasets",
+
+
+  "card.tdmixer.title": "TD Mixer – Modular VJing System",
+  "card.tdmixer.meta": "TouchDesigner · Real-time · Python",
+  "card.tdmixer.desc": "Visual performance platform built with TouchDesigner to dynamically load, mix and control visual scenes live using a modular architecture and a Python backend.",
+  "card.tdmixer.tag.touchdesigner": "TouchDesigner",
+  "card.tdmixer.tag.python": "Python",
+  "card.tdmixer.tag.realtime": "Realtime"
 }
