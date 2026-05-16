@@ -1,37 +1,37 @@
 {
   "article.audio.back": "← Back",
 
-  "article.audio.title": "Music Instrument Classification – Deep Learning",
-  "article.audio.subtitle": "End-to-end audio classification pipeline: signal cleaning, MFCC extraction, CNN training, and sliding-window inference.",
+  "article.audio.title": "Musical instrument classification – Deep Learning",
+  "article.audio.subtitle": "Complete audio classification pipeline with signal cleaning, MFCC extraction, CNN training, and prediction using temporal windows.",
 
-  "article.audio.overview.title": "Overview",
-  "article.audio.overview.text": "Goal: automatically recognize a musical instrument from an audio file. Audio is a continuous time-based signal, and the core of this project is to turn raw waveforms into a robust representation, then train a deep learning model that generalizes across recording variations.",
+  "article.audio.overview.title": "Goal",
+  "article.audio.overview.text": "Automatically recognize a musical instrument from an audio file. Audio is a continuous temporal signal, and the core of the project is transforming the raw waveform into a robust representation, then training a deep learning model capable of generalizing across recording variations.",
 
   "article.audio.dataset.title": "Data",
-  "article.audio.dataset.text": "The dataset comes from a Kaggle competition focused on musical instrument classification. Each audio file is labeled (piano, guitar, violin, drums, etc.). Key challenges include recording variability and slight class imbalance.",
+  "article.audio.dataset.text": "The dataset comes from a Kaggle competition focused on musical instruments. Each audio file is labeled (piano, guitar, violin, drums, etc.). The main challenges are recording variability and class imbalance between some instruments.",
 
   "article.audio.preprocessing.title": "Preprocessing and EDA",
-  "article.audio.preprocessing.text": "Before training, the audio is explored through several views: time-domain signal, FFT, filter banks, and MFCC. A signal envelope is used to remove silence segments and keep only informative parts of the recordings.",
+  "article.audio.preprocessing.text": "Before training, the audio is processed in several ways: temporal signal, FFT, filter banks, and MFCCs. Envelope-based signal cleaning is used to automatically remove silence and keep only meaningful segments.",
 
-  "article.audio.features.title": "Features: MFCC",
-  "article.audio.features.text": "MFCCs are used as model inputs. They summarize useful spectral information while producing a 2D representation (time × coefficients) that works well with convolutional networks.",
+  "article.audio.features.title": "",
+  "article.audio.features.text": "MFCCs are used as model inputs. They summarize useful frequency information while producing a 2D representation (time × coefficients) that can be processed efficiently by a convolutional network.",
 
   "article.audio.model.title": "Model",
-  "article.audio.model.text": "The classifier is a Keras CNN made of several convolution layers, max pooling, dropout, and dense layers. The idea is to learn local patterns from the MFCC representation (similar to an image) and then aggregate them to predict the instrument.",
+  "article.audio.model.text": "The classifier is a Keras CNN composed of multiple convolution layers, max pooling, dropout, and dense layers. The idea is to learn local patterns inside the MFCC representation (similarly to an image), then aggregate this information to predict the instrument.",
 
   "article.audio.training.title": "Training and results",
-  "article.audio.training.text": "Training is performed on randomly sampled audio windows to increase the diversity of examples seen by the network. Class weighting is used to reduce the impact of under-represented classes. The model reaches roughly 93% accuracy.",
+  "article.audio.training.text": "Training is performed on randomly sampled audio windows in order to increase the diversity of examples seen by the network. Class weighting is applied to reduce the impact of underrepresented classes. The model reaches an accuracy of around 93%.",
 
-  "article.audio.prediction.title": "Inference",
-  "article.audio.prediction.text": "At inference time, audio is split into successive windows. Each window is converted to MFCC, normalized exactly like during training, and passed through the model. Probabilities are averaged across the whole file to produce a stable prediction. Results are exported to a CSV file.",
+  "article.audio.prediction.title": "Prediction",
+  "article.audio.prediction.text": "During inference, the audio is split into successive windows, each window is converted into MFCCs, normalized the same way as during training, and passed through the model. Probabilities are then averaged across the whole file to produce a more stable prediction. Results are exported into a CSV file.",
 
-  "article.audio.conclusion.title": "Conclusion and next steps",
-  "article.audio.conclusion.text": "This project covers the full chain: signal processing, feature engineering, deep learning training, and inference. Possible extensions: audio data augmentation, full mel-spectrograms, CRNN architectures (CNN + RNN), or real-time deployment.",
+  "article.audio.conclusion.title": "Conclusion and future work",
+  "article.audio.conclusion.text": "The project covers the whole pipeline, meaning signal processing, feature engineering, deep learning, and inference. Possible next steps include audio data augmentation, full mel spectrograms, or CRNN architectures (CNN + RNN).",
 
-  "article.audio.fig.envelope.caption": "Envelope-based cleaning: raw signal vs retained segments",
-  "article.audio.fig.time.caption": "Time-domain signal (example)",
-  "article.audio.fig.fft.caption": "Fourier Transform (FFT): frequency signature",
-  "article.audio.fig.fbank.caption": "Filter bank coefficients",
+  "article.audio.fig.envelope.caption": "Envelope-based cleaning, raw signal vs retained segments",
+  "article.audio.fig.time.caption": "Temporal signal",
+  "article.audio.fig.fft.caption": "Fourier transform (FFT)",
+  "article.audio.fig.fbank.caption": "Filter bank",
   "article.audio.fig.mfcc.caption": "MFCC: time × coefficients representation",
-  "article.audio.fig.pipeline.caption": "Pipeline: audio → MFCC → CNN → probabilities"
+  "article.audio.fig.pipeline.caption": "Pipeline"
 }
