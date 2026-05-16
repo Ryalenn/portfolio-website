@@ -2,13 +2,13 @@
   "article.maxforlive.back": "← Back",
 
   "article.maxforlive.title": "Max for Live Devices",
-  "article.maxforlive.subtitle": "An evolving collection of Max for Live patches: performance tools, MIDI devices, audio effects, instruments, and experimental systems designed to enhance my workflow in Ableton Live.",
+  "article.maxforlive.subtitle": "An evolving collection of Max for Live patches: performance tools, MIDI devices, audio effects, instruments, and experiments designed to expand my workflow inside Ableton Live.",
 
   "article.maxforlive.context.title": "Context",
-  "article.maxforlive.context.text": "This page gathers my Max for Live creations developed around Ableton Live. The first devices presented here address very concrete needs related to live performance: managing multiple MIDI controllers, making mappings more reliable, quantizing certain actions, or making live gestures feel more musical.\n\nOver time, this collection is intended to expand toward other types of patches: audio effects, instruments, MIDI generators, modulation tools, or interaction systems with other visual and sound environments.",
+  "article.maxforlive.context.text": "This page gathers my Max for Live creations developed around Ableton Live. The first devices presented here answer very concrete live performance needs: managing multiple MIDI controllers, making mappings more reliable, quantizing certain actions, or making live gestures feel more musical.\n\nOver time, this collection is intended to grow toward other types of patches such as audio effects, instruments, MIDI generators, modulation tools, interaction systems with other visual and sound environments, or patches designed to create interactions that do not exist natively inside Ableton.",
 
-  "article.maxforlive.goal.title": "Goal",
-  "article.maxforlive.goal.text": "The goal is to showcase a series of personal tools designed to improve my use of Ableton Live. Each device originates from a concrete need or a musical control idea: simplifying a gesture, making a behavior more reliable, or creating an interaction that does not natively exist in Live.\n\nThis page serves as a showcase for these devices.",
+  "article.maxforlive.goal.title": "",
+  "article.maxforlive.goal.text": "",
 
   "article.maxforlive.devices.title": "Devices",
 
@@ -16,14 +16,14 @@
   "article.maxforlive.quantized.text": "This device allows switching between a DRY chain and a WET chain inside an Audio Effect Rack in a quantized way (synced to the tempo) on the next bar. It is designed to make live effect state changes more reliable by avoiding activations that are slightly early or late.\n\nThe transition between the two states is handled smoothly in order to preserve audio continuity and avoid artifacts, making it suitable for controlling global effects such as reverbs, delays, or master processing. Although it is primarily designed for Audio Effect Racks containing two chains, its use can naturally extend to any situation where switching between two states or signal types is needed.",
 
   "article.maxforlive.momentum.title": "CC to Momentum",
-  "article.maxforlive.momentum.text": "This device transforms a MIDI button into a momentary control. It allows reproducing a “press/release” behavior even when the MIDI controller or mapping behaves as a toggle.\n\nThanks to an integrated learn system, the user simply selects the button to use, and the patch handles message filtering to change the controller’s input behavior. This type of behavior is especially useful for triggering temporary effects that only remain active while a button is held during a live performance.",
+  "article.maxforlive.momentum.text": "This device transforms a MIDI button into a momentary control. It allows reproducing a “press/release” behavior even when the MIDI controller or mapping behaves as a toggle.\n\nThanks to an integrated learn system, the user simply selects the button to use, and the patch handles message filtering to change the controller’s input behavior. This type of behavior is especially useful for triggering temporary effects that only remain active while a button is being held during a live performance.",
 
-  "article.maxforlive.ux.title": "Interface and Usage",
-  "article.maxforlive.ux.text": "The interfaces are designed to be used directly inside Ableton Live through Max for Live’s Presentation mode. Essential elements remain visible and quickly accessible, while the internal patch structure stays hidden.\n\nThe objective is to provide tools that are simple, readable, and immediately usable during an Ableton Live session.",
+  "article.maxforlive.ux.title": "Interface and usage",
+  "article.maxforlive.ux.text": "The interfaces are designed to be used directly inside Ableton Live through Max for Live’s Presentation mode. Essential elements remain visible and quickly accessible, while the internal patch structure stays hidden.\n\nThe goal is to provide tools that are simple, readable, and immediately usable during an Ableton Live session.",
 
   "article.maxforlive.conclusion.title": "Conclusion",
-  "article.maxforlive.conclusion.text": "These devices illustrate a practice-oriented approach: creating tools adapted to real-world use inside Ableton Live, with an emphasis on simplicity.\n\nThis collection is intended to evolve with new patches, progressively covering broader use cases ranging from live performance to sound design and experimentation.",
+  "article.maxforlive.conclusion.text": "These devices illustrate a practice-oriented approach, meaning creating tools adapted to real-world use inside Ableton Live while keeping an emphasis on simplicity.\n\nThis collection is intended to evolve with new patches, progressively covering broader use cases ranging from live performance to sound design and experimentation.",
 
   "article.maxforlive.fig.quantized.caption": "Quantized FX Toggle: quantized switching between DRY and WET chains with a smooth transition.",
-  "article.maxforlive.fig.momentum.caption": "CC to Momentum: converts a MIDI button into a momentary control."
+  "article.maxforlive.fig.momentum.caption": "CC to Momentum: converting a MIDI button into a momentary control."
 }
