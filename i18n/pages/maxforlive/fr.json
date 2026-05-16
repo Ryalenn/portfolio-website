@@ -5,10 +5,10 @@
   "article.maxforlive.subtitle": "Une collection évolutive de patches Max for Live : outils de performance, dispositifs MIDI, effets audio, instruments et expérimentations conçus pour enrichir mon workflow dans Ableton Live.",
 
   "article.maxforlive.context.title": "Contexte",
-  "article.maxforlive.context.text": "Cette page regroupe mes créations Max for Live développées autour d’Ableton Live. Les premiers devices présentés répondent à des besoins très concrets liés à la performance live : gérer plusieurs contrôleurs MIDI, fiabiliser des mappings, quantifier certaines actions ou rendre des gestes plus musicaux en live.\n\nÀ terme, cette collection a vocation à s’élargir à d’autres types de patches : effets audio, instruments, générateurs MIDI, outils de modulation ou systèmes d’interaction avec d’autres environnements visuels et sonores.",
+  "article.maxforlive.context.text": "Cette page regroupe mes créations Max for Live développées autour d’Ableton Live. Les premiers devices présentés répondent à des besoins très concrets liés à la performance live : gérer plusieurs contrôleurs MIDI, fiabiliser des mappings, quantifier certaines actions ou rendre des gestes plus musicaux en live.\n\nÀ terme, cette collection a vocation à s’élargir à d’autres types de patches, comme des effets audio, instruments, générateurs MIDI, outils de modulation, systèmes d’interaction avec d’autres environnements visuels et sonores ou des patch pour créer des interactions non natives à Ableton.",
 
-  "article.maxforlive.goal.title": "Objectif",
-  "article.maxforlive.goal.text": "L’objectif est de présenter une série d’outils personnels conçus pour améliorer mon usage d’Ableton Live. Chaque device part d’un besoin concret ou d’une idée de contrôle musical : simplifier un geste, rendre un comportement plus fiable ou créer une interaction absente nativement dans Live.\n\nCette page fonctionne comme une vitrine de ces dispositifs.",
+  "article.maxforlive.goal.title": "",
+  "article.maxforlive.goal.text": "",
 
   "article.maxforlive.devices.title": "Devices",
 
@@ -22,7 +22,7 @@
   "article.maxforlive.ux.text": "Les interfaces sont conçues pour être utilisées directement dans Ableton Live via le mode Presentation de Max for Live. Les éléments essentiels restent visibles et manipulables rapidement, tandis que le fonctionnement interne du patch est masqué.\n\nL’objectif est de proposer des outils simples, lisibles et immédiatement utilisables lors d'une session sur Ableton Live.",
 
   "article.maxforlive.conclusion.title": "Conclusion",
-  "article.maxforlive.conclusion.text": "Ces devices illustrent une approche centrée sur la pratique : créer des outils adaptés à un usage réel dans Ableton Live, en mettant l’accent sur la simplicité.\n\nCette collection est amenée à évoluer avec de nouveaux patches, couvrant progressivement des usages plus larges allant de la performance live à la création sonore et à l’expérimentation.",
+  "article.maxforlive.conclusion.text": "Ces devices illustrent une approche centrée sur la pratique, c'est à dire créer des outils adaptés à un usage réel dans Ableton Live, en mettant l’accent sur la simplicité.\n\nCette collection est amenée à évoluer avec de nouveaux patches, couvrant progressivement des usages plus larges allant de la performance live à la création sonore et à l’expérimentation.",
 
   "article.maxforlive.fig.quantized.caption": "Quantized FX Toggle : bascule quantifiée entre chaînes DRY et WET avec transition fluide.",
   "article.maxforlive.fig.momentum.caption": "CC to Momentum : conversion d’un bouton MIDI en contrôle momentané."
