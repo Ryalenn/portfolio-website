@@ -2,31 +2,31 @@
   "article.xtts.back": "← Back",
 
   "article.xtts.title": "Voice Cloner with XTTS v2",
-  "article.xtts.subtitle": "Zero-shot voice cloning app: upload or record audio samples, generate speech from text, and compare multiple outputs.",
+  "article.xtts.subtitle": "A zero-shot voice cloning application: import or record voice references, generate speech from text, and choose between multiple variations.",
 
-  "article.xtts.overview.title": "Overview",
-  "article.xtts.overview.text": "This project explores the use of XTTS v2 to generate synthetic speech from a short voice sample. The goal is to build a simple application: the user uploads or records a few audio clips, writes a sentence, selects a language, and gets three downloadable outputs.\n\nThe focus is on preserving the voice timbre (the overall tone and texture of the voice), rather than expressive acting or emotional variation.",
+  "article.xtts.overview.title": "",
+  "article.xtts.overview.text": "This project uses XTTS v2 to generate a synthetic voice from a short voice sample. The goal is to create a simple application: the user imports or records a few audio references, writes the text to generate, chooses a language, and gets three downloadable versions.\n\nThe project mainly focuses on reproducing vocal timbre, meaning the overall sound and character of the voice.",
 
-  "article.xtts.goal.title": "Project goal",
-  "article.xtts.goal.text": "The main objective is to integrate a modern text-to-speech model into a simple local interface. The user does not need to train a model or write code: they just provide a few voice samples and a text.\n\nThis makes it possible to quickly experiment with zero-shot voice cloning while keeping the experience lightweight and accessible.",
+  "article.xtts.goal.title": "Goal",
+  "article.xtts.goal.text": "The main goal is to integrate a modern text-to-speech model into a simple local interface. The user does not need to train a model or handle code: they simply provide a few voice references and a text.\n\nThis approach makes it possible to quickly experiment with zero-shot voice cloning while keeping the experience lightweight and accessible.",
 
-  "article.xtts.pipeline.title": "How it works",
-  "article.xtts.pipeline.text": "The application feeds multiple voice samples, a text input, and a target language into XTTS v2. The model then generates a new audio output that resembles the provided voice.\n\nTo avoid relying on a single generation, three slightly different versions are produced. The user can listen and choose the most convincing one.",
+  "article.xtts.pipeline.title": "General workflow",
+  "article.xtts.pipeline.text": "The application sends multiple voice samples, a text, and a generation language to XTTS v2. The model uses these elements to produce a new audio clip with a voice similar to the provided references.\n\nTo avoid relying on a single output, three variations are generated using slightly different inference settings. The user can then listen to the results and download the version that feels the most convincing.",
 
   "article.xtts.preprocessing.title": "Audio preprocessing",
-  "article.xtts.preprocessing.text": "Before generation, each reference audio is processed automatically. The signal is converted to mono, resampled to 24 kHz, normalized in volume, and trimmed to remove silence at the beginning and end.\n\nThis step helps provide cleaner and more consistent inputs to the model, which generally improves output stability.",
+  "article.xtts.preprocessing.text": "Before generation, each reference audio is automatically prepared. The signal is converted to mono, resampled to 24 kHz, volume-normalized, and trimmed to remove unnecessary silence at the beginning and end of the file.\n\nThis step provides the model with cleaner and more consistent samples, which generally improves generation stability.",
 
   "article.xtts.app.title": "Streamlit application",
-  "article.xtts.app.text": "The interface is built with Streamlit to keep it simple and easy to run locally. Users can upload audio files or record samples directly from their microphone.\n\nThe number of reference samples is limited to ten to keep the interface clean. Uploaded audio can be previewed before generation to quickly check its quality.",
+  "article.xtts.app.text": "The interface is built with Streamlit to remain simple to run locally. Users can either import audio files or record voice samples directly from their microphone.\n\nThe application limits the number of references to ten samples in order to keep the workflow clear and lightweight. Added audio files can also be previewed before generation to quickly check their quality.",
 
-  "article.xtts.variants.title": "Output variations",
-  "article.xtts.variants.text": "Speech generation can vary depending on inference parameters, so the app produces three versions of the same sentence.\n\nThe first version favors stability, the second aims for a balance between naturalness and fidelity, and the third allows slightly more variation. This makes it easier to pick the most convincing result.",
+  "article.xtts.variants.title": "Variant generation",
+  "article.xtts.variants.text": "Voice generation can vary depending on inference parameters, so the application produces three versions of the same sentence.\n\nThe first version prioritizes stability, the second aims for a balance between naturalness and similarity, and the third gives the model a bit more freedom. This comparison helps select the most convincing result depending on the voice and generated sentence.",
 
   "article.xtts.limits.title": "Limitations",
-  "article.xtts.limits.text": "XTTS v2 can produce convincing zero-shot results, but it does not perfectly replicate a voice. It can capture aspects of timbre, pitch, and texture, but may lose finer details such as accent, pronunciation habits, or subtle intonation.\n\nPronunciation also depends heavily on the input text and chosen language. Proper nouns, acronyms, numbers, or foreign words may require more phonetic spelling to sound natural.",
+  "article.xtts.limits.text": "XTTS v2 can produce convincing zero-shot results, but it does not perfectly reproduce a voice. The model may preserve part of the timbre, pitch, and vocal texture, while losing finer details such as accent, pronunciation habits, or highly personal intonations.\n\nPronunciation also depends heavily on the provided text and selected language. Proper nouns, acronyms, numbers, or foreign words may require a more phonetic spelling to achieve a more natural result.",
 
-  "article.xtts.conclusion.title": "Conclusion and next steps",
-  "article.xtts.conclusion.text": "This project demonstrates how to integrate a modern TTS model into a small local application. The result is a simple tool to experiment with voice cloning from a few samples, compare multiple generations, and download the outputs.\n\nPossible improvements include automatic splitting of long sentences, better text normalization, and exploring audio-to-audio models. These models are heavier to run and require more resources, but can provide more accurate voice reproduction in some cases.",
+  "article.xtts.conclusion.title": "Conclusion and future work",
+  "article.xtts.conclusion.text": "This project shows how a modern TTS model can be integrated into a small local application. The result is a simple tool for experimenting with voice cloning from only a few audio samples.\n\nPossible improvements mainly include automatic splitting of long sentences, smarter text normalization, and experimenting with an audio-to-audio model — heavier to run and more resource-intensive, but potentially more accurate for certain use cases.",
 
   "article.xtts.fig.pipeline.caption": "Pipeline",
   "article.xtts.fig.app.caption": "Streamlit interface"
