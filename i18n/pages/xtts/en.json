@@ -28,6 +28,6 @@
   "article.xtts.conclusion.title": "Conclusion and next steps",
   "article.xtts.conclusion.text": "This project demonstrates how to integrate a modern TTS model into a small local application. The result is a simple tool to experiment with voice cloning from a few samples, compare multiple generations, and download the outputs.\n\nPossible improvements include automatic splitting of long sentences, better text normalization, and exploring audio-to-audio models. These models are heavier to run and require more resources, but can provide more accurate voice reproduction in some cases.",
 
-  "article.xtts.fig.pipeline.caption": "Pipeline: audio samples → preprocessing → XTTS v2 → three generated outputs",
-  "article.xtts.fig.app.caption": "Streamlit interface: upload or record samples, input text, select language, and generate audio"
+  "article.xtts.fig.pipeline.caption": "Pipeline",
+  "article.xtts.fig.app.caption": "Streamlit interface"
 }
