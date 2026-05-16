@@ -2,39 +2,39 @@
   "article.audioclf.back": "← Back",
 
   "article.audioclf.title": "Fine-tuning DistilHuBERT for music genre classification",
-  "article.audioclf.subtitle": "Audio deep learning project based on the GTZAN dataset: audio signal preprocessing, adaptation of a pretrained transformer and performance analysis on a music classification task.",
+  "article.audioclf.subtitle": "Deep learning audio project based on the GTZAN dataset: audio signal preprocessing, adaptation of a pretrained transformer, and performance analysis on a classification task.",
 
-  "article.audioclf.overview.title": "Overview",
-  "article.audioclf.overview.text": "The goal was to automatically classify music excerpts according to their genre, starting directly from raw audio signals. The project shows how to prepare waveforms, convert them into the format expected by DistilHuBERT, and fine-tune the model to recognize 10 different music genres.",
+  "article.audioclf.overview.title": "Goal",
+  "article.audioclf.overview.text": "The goal here was to automatically classify music excerpts by genre directly from raw audio signals. The project shows how to prepare waveforms, convert them into the format expected by DistilHuBERT, and fine-tune the model to recognize 10 different music genres.",
 
-  "article.audioclf.dataset.title": "Dataset",
-  "article.audioclf.dataset.text": "The project uses GTZAN, a classic music classification dataset composed of 1000 audio excerpts divided into 10 genres. Each sample corresponds to a 30-second music excerpt. Since the dataset is relatively balanced, a simple train/test split is enough to evaluate the model on unseen data.",
+  "article.audioclf.dataset.title": "Data",
+  "article.audioclf.dataset.text": "The project uses GTZAN, a classic music classification dataset composed of 1000 audio excerpts distributed across 10 genres. Each track corresponds to a 30-second excerpt. Since the dataset is relatively balanced, a simple train/test split is enough to evaluate the model’s behavior on unseen data.",
 
   "article.audioclf.preprocessing.title": "Audio preprocessing",
-  "article.audioclf.preprocessing.text": "Audio excerpts are resampled to 16 kHz to match the input format expected by the pretrained model. Preprocessing is applied on the fly (meaning directly during the training loop) using the feature extractor: signals are truncated if necessary, normalized, then converted into tensors that can be processed by the transformer. This approach avoids storing precomputed features and keeps the pipeline lighter.",
+  "article.audioclf.preprocessing.text": "The excerpts are resampled to 16 kHz to match the format expected by the pretrained model. Preprocessing is applied on the fly (inside the training loop) through the feature extractor. It resizes the inputs if needed, normalizes them, and converts them into tensors usable by the transformer. This approach avoids storing all precomputed data at once and keeps the pipeline lighter.",
 
   "article.audioclf.model.title": "Model",
-  "article.audioclf.model.text": "The model used here is DistilHuBERT, a distilled and lighter version of HuBERT, with around 23 million parameters. Unlike models that operate on spectrograms, DistilHuBERT directly takes a raw audio waveform as input after resampling and normalization.\n\nI chose this model because it is more compact than larger audio transformers while still keeping strong audio representations learned from large-scale datasets. It is therefore a good compromise for a fine-tuning notebook: powerful enough to achieve good results, while remaining easier to train on Google Colab.\n\nIn practice, fine-tuning reuses the pretrained backbone, which already knows how to extract general audio representations, and replaces the original classification head with a new one adapted to the 10 GTZAN genres. Training then adjusts the model weights to specialize these representations on my music data instead of learning the whole audio structure from scratch.",
+  "article.audioclf.model.text": "The model used is DistilHuBERT, a distilled and lighter version of HuBERT with around 23 million parameters. Unlike models working on spectrograms, DistilHuBERT directly takes a raw, resampled, and normalized waveform as input.\n\nI chose it because it is more compact than large audio transformers while still keeping representations learned from massive amounts of audio data. It is therefore a good compromise for a fine-tuning notebook: powerful enough to obtain strong results while remaining easier to train on Google Colab.\n\nConcretely, the fine-tuning process reuses the pretrained model, which already knows how to extract general audio representations, and replaces the classification head with one adapted to GTZAN’s 10 genres. Training then adjusts the model weights to specialize these representations on my music dataset instead of learning the whole audio structure from scratch.",
 
   "article.audioclf.training.title": "Training",
-  "article.audioclf.training.text": "Training is performed using the Hugging Face Trainer API. The notebook defines the main hyperparameters: batch size, gradient accumulation, learning rate, scheduler, warmup, weight decay and evaluation at each epoch. After a first training phase, a second fine-tuning phase is launched with a different learning rate to improve validation accuracy.",
+  "article.audioclf.training.text": "Training is performed using the Hugging Face Trainer. The notebook defines the main hyperparameters: batch size, gradient accumulation, learning rate, scheduler, warmup, weight decay, and evaluation at each epoch. After a first training phase, a second fine-tuning stage is launched with a different learning rate to improve validation accuracy.",
 
   "article.audioclf.inference.title": "Evaluation",
-  "article.audioclf.inference.text": "After training, the model is evaluated on the test set. The analysis does not stop at global accuracy: a confusion matrix and a classification report help identify which genres are well separated and which ones remain harder to distinguish.",
+  "article.audioclf.inference.text": "After training, the model is evaluated on the test set. The analysis does not stop at overall accuracy: a confusion matrix and a classification report help identify which genres are well separated and which ones remain harder to distinguish.",
 
   "article.audioclf.results.title": "Results",
-  "article.audioclf.results.text": "The notebook reaches a test accuracy of around 87%, which is a strong result on GTZAN for such a compact model. Most genres are correctly recognized. The main confusions occur between rock, metal and country, which is not very surprising since these genres share many instrumental characteristics such as guitar, bass and drums. In this case, the confusion matrix helps relate the model errors to actual musical similarities.",
+  "article.audioclf.results.text": "The notebook reaches a test accuracy of around 87%, which is a strong result on GTZAN for a relatively small model. Most genres are recognized correctly. The main confusions mostly happen between rock, metal, and country, which makes sense since these styles share many instrumental characteristics such as guitar, bass, and drums. In this case, the confusion matrix helps show the relationship between the model’s errors and actual musical similarities.",
 
   "article.audioclf.conclusion.title": "Conclusion and future work",
-  "article.audioclf.conclusion.text": "This project allowed me to build a complete audio classification pipeline using a pretrained transformer model. Fine-tuning DistilHuBERT makes it possible to obtain strong performances without training a model from scratch, by adapting general audio representations to a specific music classification task.\n\nThe results are very encouraging, with an accuracy close to 87%. The remaining errors mostly come from musically similar genres, which shows that the limitation does not only come from the model itself but also from the nature of the classes. Future improvements could include testing other audio backbones, evaluating the model on multiple splits, or building a small inference interface to test the classifier on new songs.",
+  "article.audioclf.conclusion.text": "This project allowed me to build a complete audio classification pipeline using a pretrained transformer. Fine-tuning DistilHuBERT makes it possible to obtain strong performance without training a model from scratch, by adapting general audio representations to a specific music classification task.\n\nThe results are very encouraging, with an accuracy close to 87%. The remaining errors mostly come from musically similar genres, showing that the limitation does not only come from the model itself but also from the nature of the classes. To go further, it would be interesting to test additional music genres or build a small inference interface to try the model on new tracks.",
 
   "article.audioclf.structure.title": "Project structure",
 
-  "article.audioclf.fig.pipeline.caption": "Global pipeline: waveform → feature extractor → fine-tuned DistilHuBERT → genre prediction",
-  "article.audioclf.fig.classdist.caption": "Distribution of music excerpts across genres in the dataset",
-  "article.audioclf.fig.waveform.caption": "Waveform example from a GTZAN excerpt",
+  "article.audioclf.fig.pipeline.caption": "",
+  "article.audioclf.fig.classdist.caption": "Distribution of excerpts by genre in the dataset",
+  "article.audioclf.fig.waveform.caption": "Example waveform from a GTZAN excerpt",
   "article.audioclf.fig.melspec.caption": "Time-frequency visualization of an audio excerpt",
-  "article.audioclf.fig.architecture.caption": "Simplified schema of the DistilHuBERT-based classification model",
-  "article.audioclf.fig.loss.caption": "Training curves: loss and validation accuracy",
+  "article.audioclf.fig.architecture.caption": "Simplified diagram of the DistilHuBERT-based classification model",
+  "article.audioclf.fig.loss.caption": "Training loss and validation accuracy curves",
   "article.audioclf.fig.confusion.caption": "Confusion matrix on the test set"
 }
