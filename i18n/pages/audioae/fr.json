@@ -32,7 +32,7 @@
 
   "article.audioae.fig.waveform.caption": "Waveform prétraité",
   "article.audioae.fig.melspec.caption": "Log-mel spectrogramme du sample",
-  "article.audioae.fig.pipeline.caption": "Pipeline : waveform → mel-spectrogramme → autoencodeur → spectrogramme reconstruit",
+  "article.audioae.fig.pipeline.caption": "Pipeline : waveform",
   "article.audioae.fig.architecture.caption": "Architecture de l’autoencodeur convolutionnel 2D",
   "article.audioae.fig.reconstruction.caption": "Comparaison entre spectrogramme original et spectrogramme reconstruit",
   "article.audioae.fig.error.caption": "Carte d’erreur absolue entre entrée et reconstruction",
