@@ -33,7 +33,7 @@
 
   "article.audioae.fig.waveform.caption": "Preprocessed waveform",
   "article.audioae.fig.melspec.caption": "Log-mel spectrogram of the sample",
-  "article.audioae.fig.pipeline.caption": "Pipeline: waveform → mel spectrogram → autoencoder → reconstructed spectrogram",
+  "article.audioae.fig.pipeline.caption": "Pipeline",
   "article.audioae.fig.architecture.caption": "2D convolutional autoencoder architecture",
   "article.audioae.fig.reconstruction.caption": "Comparison between original and reconstructed spectrograms",
   "article.audioae.fig.error.caption": "Absolute error map between input and reconstruction",
