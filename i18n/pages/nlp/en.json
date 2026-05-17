@@ -38,7 +38,7 @@
   "article.nlp.future.text": "Possible improvements include replacing embedding summation with transformer-based models (BERT, RoBERTa), introducing attention mechanisms to better exploit context, artificially augmenting data for rare classes, or testing optimization variants such as AdamW.",
 
   "article.nlp.structure.title": "Repository structure",
-  "article.nlp.structure.text": ".\n├── Train_model.py\n├── Use_model.py\n├── README.md\n├── /images\n├── /graphs\n└── NLP_BEST_Model.pkl",
+  "article.nlp.structure.text": ".\n├── Train_model.py\n├── Use_model.py\n├── README.md\n├── train.csv\n└── NLP_BEST_Model.pkl",
 
   "article.nlp.note.title": "Personal note",
   "article.nlp.note.text": "This project allowed me to deepen my understanding of classic NLP pipelines, pretrained embeddings, multi-label classification, and neural network optimization. It also shows that a simple architecture can be surprisingly effective when combined with solid preprocessing."
