@@ -370,5 +370,46 @@
 
   <script data-goatcounter="https://portfolio-tb.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+
+  <script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  const campaign =
+    params.get("campaign") ||
+    params.get("utm_campaign");
+
+  if (!campaign) return;
+
+  const cleanCampaign = campaign
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]/g, "-")
+    .slice(0, 80);
+
+  if (!cleanCampaign) return;
+
+  const sessionKey = "portfolio-telegram-notified-" + cleanCampaign;
+
+  if (sessionStorage.getItem(sessionKey)) return;
+
+  setTimeout(() => {
+    sessionStorage.setItem(sessionKey, "1");
+
+    fetch("WORKER_URL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        campaign: cleanCampaign,
+        referrer: document.referrer || ""
+      }),
+      keepalive: true
+    }).catch(() => {});
+  }, 8000);
+})();
+</script>
+  
 </body>
 </html>
