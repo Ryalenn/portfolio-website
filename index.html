@@ -371,43 +371,132 @@
   <script data-goatcounter="https://portfolio-tb.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
-  <script>
+ <script>
 (function () {
+  const WORKER_URL = "https://portfolio-tracker.ryalen95.workers.dev";
+
+  const STORAGE_KEY = "portfolio-campaign-tracker-v1";
+  const EXPIRATION_DAYS = 14;
+  const WAIT_BEFORE_NOTIFY_MS = 8000;
+
+  function normalizeCampaign(value) {
+    if (!value) return "";
+
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]/g, "-")
+      .slice(0, 80);
+  }
+
+  function getStoredCampaign() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+
+      const data = JSON.parse(raw);
+
+      if (!data.campaign || !data.expiresAt) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+
+      if (Date.now() > data.expiresAt) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+
+      return data;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveCampaign(campaign) {
+    try {
+      const now = Date.now();
+
+      const data = {
+        campaign,
+        firstSeenAt: now,
+        lastSeenAt: now,
+        expiresAt: now + EXPIRATION_DAYS * 24 * 60 * 60 * 1000
+      };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch {
+      // Si localStorage est bloqué, on ignore silencieusement.
+    }
+  }
+
+  function refreshStoredCampaign(data) {
+    try {
+      const now = Date.now();
+
+      const refreshed = {
+        ...data,
+        lastSeenAt: now,
+        expiresAt: now + EXPIRATION_DAYS * 24 * 60 * 60 * 1000
+      };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(refreshed));
+    } catch {
+      // Si localStorage est bloqué, on ignore silencieusement.
+    }
+  }
+
   const params = new URLSearchParams(window.location.search);
 
-  const campaign =
+  const campaignFromUrl = normalizeCampaign(
     params.get("campaign") ||
-    params.get("utm_campaign");
+    params.get("utm_campaign")
+  );
 
-  if (!campaign) return;
+  const storedCampaign = getStoredCampaign();
 
-  const cleanCampaign = campaign
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9._-]/g, "-")
-    .slice(0, 80);
+  let campaign = "";
+  let eventType = "";
 
-  if (!cleanCampaign) return;
+  if (campaignFromUrl) {
+    campaign = campaignFromUrl;
 
-  const sessionKey = "portfolio-telegram-notified-" + cleanCampaign;
+    if (storedCampaign && storedCampaign.campaign === campaignFromUrl) {
+      eventType = "return_visit";
+      refreshStoredCampaign(storedCampaign);
+    } else {
+      eventType = "initial_visit";
+      saveCampaign(campaignFromUrl);
+    }
+  } else if (storedCampaign) {
+    campaign = storedCampaign.campaign;
+    eventType = "return_visit";
+    refreshStoredCampaign(storedCampaign);
+  } else {
+    return;
+  }
+
+  const sessionKey = "portfolio-telegram-notified:" + eventType + ":" + campaign;
 
   if (sessionStorage.getItem(sessionKey)) return;
 
   setTimeout(() => {
+    if (sessionStorage.getItem(sessionKey)) return;
+
     sessionStorage.setItem(sessionKey, "1");
 
-    fetch("https://portfolio-tracker.ryalen95.workers.dev", {
+    fetch(WORKER_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        campaign: cleanCampaign,
+        campaign,
+        eventType,
         referrer: document.referrer || ""
       }),
       keepalive: true
     }).catch(() => {});
-  }, 8000);
+  }, WAIT_BEFORE_NOTIFY_MS);
 })();
 </script>
   
