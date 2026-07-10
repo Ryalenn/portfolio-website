@@ -371,7 +371,7 @@
   <script data-goatcounter="https://portfolio-tb.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
- <script>
+<script>
 (function () {
   const WORKER_URL = "https://portfolio-tracker.ryalen95.workers.dev";
 
@@ -425,7 +425,7 @@
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
-      // Si localStorage est bloqué, on ignore silencieusement.
+      // localStorage peut être bloqué par certains navigateurs/extensions.
     }
   }
 
@@ -441,62 +441,158 @@
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(refreshed));
     } catch {
-      // Si localStorage est bloqué, on ignore silencieusement.
+      // localStorage peut être bloqué par certains navigateurs/extensions.
     }
   }
 
-  const params = new URLSearchParams(window.location.search);
+  function getCampaignContext() {
+    const params = new URLSearchParams(window.location.search);
 
-  const campaignFromUrl = normalizeCampaign(
-    params.get("campaign") ||
-    params.get("utm_campaign")
-  );
+    const campaignFromUrl = normalizeCampaign(
+      params.get("campaign") ||
+      params.get("utm_campaign")
+    );
 
-  const storedCampaign = getStoredCampaign();
+    const storedCampaign = getStoredCampaign();
 
-  let campaign = "";
-  let eventType = "";
+    if (campaignFromUrl) {
+      if (storedCampaign && storedCampaign.campaign === campaignFromUrl) {
+        refreshStoredCampaign(storedCampaign);
 
-  if (campaignFromUrl) {
-    campaign = campaignFromUrl;
+        return {
+          campaign: campaignFromUrl,
+          eventType: "return_visit",
+          isAnonymous: false
+        };
+      }
 
-    if (storedCampaign && storedCampaign.campaign === campaignFromUrl) {
-      eventType = "return_visit";
-      refreshStoredCampaign(storedCampaign);
-    } else {
-      eventType = "initial_visit";
       saveCampaign(campaignFromUrl);
+
+      return {
+        campaign: campaignFromUrl,
+        eventType: "initial_visit",
+        isAnonymous: false
+      };
     }
-  } else if (storedCampaign) {
-    campaign = storedCampaign.campaign;
-    eventType = "return_visit";
-    refreshStoredCampaign(storedCampaign);
-  } else {
-    return;
+
+    if (storedCampaign) {
+      refreshStoredCampaign(storedCampaign);
+
+      return {
+        campaign: storedCampaign.campaign,
+        eventType: "return_visit",
+        isAnonymous: false
+      };
+    }
+
+    return {
+      campaign: "",
+      eventType: "",
+      isAnonymous: true
+    };
   }
 
-  const sessionKey = "portfolio-telegram-notified:" + eventType + ":" + campaign;
+  function notifyPortfolioEvent({
+    campaign,
+    eventType,
+    label = "",
+    targetUrl = "",
+    isAnonymous = false,
+    delayMs = 0,
+    dedupeScope = "session"
+  }) {
+    if (!eventType) return;
 
-  if (sessionStorage.getItem(sessionKey)) return;
+    const dedupeKeyParts = [
+      "portfolio-telegram-notified",
+      dedupeScope,
+      isAnonymous ? "anonymous" : campaign,
+      eventType,
+      label || targetUrl || "default"
+    ];
 
-  setTimeout(() => {
-    if (sessionStorage.getItem(sessionKey)) return;
+    const dedupeKey = dedupeKeyParts.join(":");
 
-    sessionStorage.setItem(sessionKey, "1");
+    if (sessionStorage.getItem(dedupeKey)) return;
 
-    fetch(WORKER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        campaign,
-        eventType,
-        referrer: document.referrer || ""
-      }),
-      keepalive: true
-    }).catch(() => {});
-  }, WAIT_BEFORE_NOTIFY_MS);
+    const send = () => {
+      if (sessionStorage.getItem(dedupeKey)) return;
+
+      sessionStorage.setItem(dedupeKey, "1");
+
+      fetch(WORKER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          campaign,
+          eventType,
+          label,
+          targetUrl,
+          referrer: document.referrer || "",
+          isAnonymous
+        }),
+        keepalive: true
+      }).catch(() => {});
+    };
+
+    if (delayMs > 0) {
+      setTimeout(send, delayMs);
+    } else {
+      send();
+    }
+  }
+
+  const context = getCampaignContext();
+
+  if (!context.isAnonymous && context.eventType) {
+    notifyPortfolioEvent({
+      campaign: context.campaign,
+      eventType: context.eventType,
+      isAnonymous: false,
+      delayMs: WAIT_BEFORE_NOTIFY_MS,
+      dedupeScope: "session"
+    });
+  }
+
+  document.addEventListener("click", function (event) {
+    const trackableElement = event.target.closest("[data-track-event], a");
+
+    if (!trackableElement) return;
+
+    const explicitEventType = trackableElement.dataset.trackEvent || "";
+    const explicitLabel = trackableElement.dataset.trackLabel || "";
+
+    const href = trackableElement.href || "";
+    const isGithubLink = href.includes("github.com");
+
+    let eventType = explicitEventType;
+
+    if (!eventType && isGithubLink) {
+      eventType = "github_click";
+    }
+
+    if (!eventType) return;
+
+    const label =
+      explicitLabel ||
+      trackableElement.getAttribute("aria-label") ||
+      trackableElement.textContent.trim().replace(/\s+/g, " ").slice(0, 120) ||
+      "élément non précisé";
+
+    const freshContext = getCampaignContext();
+
+    notifyPortfolioEvent({
+      campaign: freshContext.campaign,
+      eventType,
+      label,
+      targetUrl: href || window.location.href,
+      isAnonymous: freshContext.isAnonymous,
+      delayMs: 0,
+      dedupeScope: "session"
+    });
+  });
 })();
 </script>
   
